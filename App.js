@@ -1,23 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Home from './components/Home';
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.textStyle}>Hello World</Text>
+    <View className='flex-1'>
+      <ScrollView>
+      <Home />
+      </ScrollView>
+      <Footer />
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textStyle: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-    textAlign: 'center',
-  },
-});
