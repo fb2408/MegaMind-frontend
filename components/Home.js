@@ -6,7 +6,7 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconE from 'react-native-vector-icons/Entypo';
 import Footer from './Footer'
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View className='flex-1'>
       <ScrollView>
@@ -110,7 +110,7 @@ export default function Home() {
           </View>
         </View>
       </ScrollView>
-      <Footer />
+      <Footer navigation={navigation}/>
     </View>
   );
 }

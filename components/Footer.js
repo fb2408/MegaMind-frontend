@@ -4,7 +4,7 @@ import IconIonicons from 'react-native-vector-icons/Ionicons'
 import IconAnt from 'react-native-vector-icons/AntDesign'
 import IconFontisto from 'react-native-vector-icons/Fontisto'
 
-export default function Footer() {
+export default function Footer({navigation}) {
   return(
     <View className="flex-row justify-around items-center h-12 bg-blue-950">
       <TouchableOpacity>
@@ -12,6 +12,9 @@ export default function Footer() {
           name="home"
           size={28}
           color="white"
+          onPress={() =>
+            navigation.navigate('Home')
+          }
         />
       </TouchableOpacity>
       <TouchableOpacity>
@@ -19,6 +22,9 @@ export default function Footer() {
           name="profile"
           size={28}
           color="white"
+          onPress={() =>
+            navigation.navigate('Leagues')
+          }
         />
       </TouchableOpacity>
       <TouchableOpacity>
