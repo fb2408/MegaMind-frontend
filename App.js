@@ -7,6 +7,7 @@ import Home from './components/Home';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Leagues from './components/Leagues';
+import League from './components/League';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,16 +16,21 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home' screenOptions={{animationEnabled: false}}>
         <Stack.Screen
-        name='Home'
-        component={Home}
-        options={{headerShown: false, animation: 'none'}}
+          name='Home'
+          component={Home}
+          options={{headerShown: false, animation: 'none'}}
         />
         <Stack.Screen
           name='Leagues'
           component={Leagues}
           options={{headerShown: false, animation: 'none'}}
         />
+        <Stack.Screen
+          name='League'
+          component={League}
+          options={{headerShown: false, animation: 'none'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }

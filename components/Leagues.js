@@ -1,4 +1,4 @@
-import {ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {ScrollView, Text, TextInput, TouchableHighlight, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import Footer from './Footer';
 
@@ -38,13 +38,14 @@ export default function Leagues({navigation}) {
     <View className='flex-1'>
       <ScrollView>
         <View className='flex-1 justify-start items-start m-5'>
-          <Text className='font-black text-3xl text-blue-950 mb-8'>My leagues</Text>
+          <Text className='font-black text-3xl text-blue-950 mb-4'>My leagues</Text>
           {leagues.map((league, index) => {
             return (
-              <View className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-2 flex justify-center items-center'
+              <TouchableHighlight className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
+                    onPress={() => navigation.navigate('League')}
                     key={index}>
                 <Text className='font-bold text-lg text-blue-950'>{league.name}</Text>
-              </View>
+              </TouchableHighlight>
             );
           })}
           <View className='flex-row justify-around items-center my-8 w-full'>
@@ -60,10 +61,10 @@ export default function Leagues({navigation}) {
           </View>
           {
             visible ?
-              <View className='w-full border-2 border-gray-300 rounded-2xl p-4'>
+              <View className='w-full border-2 border-gray-300 rounded-2xl p-3'>
                 <Text className='text-blue-950 font-bold text-base mb-2'>Provide a code</Text>
                 <TextInput onChangeText={setCode} placeholder='code'
-                           className='border-2 border-blue-950 rounded-md h-10' />
+                           className='border-2 border-blue-950 rounded-md h-10 p-2' />
               </View> : <></>
           }
         </View>
