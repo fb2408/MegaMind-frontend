@@ -22,11 +22,11 @@ export default function Leagues({navigation}) {
           <Text className='font-black text-3xl text-blue-950 mb-4'>My leagues</Text>
           {leagues.leagues && leagues.leagues.map((league, index) => {
             return (
-              <TouchableHighlight className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
+              <TouchableOpacity activeOpacity={0.4} className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
                     onPress={() => navigation.navigate('League', {leagueId: league.leagueId, userId: 4})}
                     key={league.leagueId}>
                 <Text className='font-bold text-lg text-blue-950'>{league.leagueName}</Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
             );
           })}
           <View className='flex-row justify-around items-center my-8 w-full'>

@@ -1,4 +1,4 @@
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, ScrollView} from 'react-native';
 import Footer from './Footer';
 import LinearGradient from 'react-native-linear-gradient';
 import {useEffect, useState} from 'react';
@@ -8,6 +8,15 @@ import IconFont5 from 'react-native-vector-icons/FontAwesome5'
 import IconFont6 from 'react-native-vector-icons/FontAwesome6'
 
 export default function Profile({navigation}) {
+
+  const categoryIcons = {
+    History: 'book-open',
+    Music: 'music',
+    Sport: 'trophy',
+    Art: 'palette',
+    Geography: 'globe-americas',
+    Movies: 'film'
+  }
 
   const [data, setData] = useState({});
 
@@ -100,6 +109,37 @@ export default function Profile({navigation}) {
             </View>
 
           </View>
+
+          <Text className="text-blue-950 font-semibold text-base my-2">Category percentage</Text>
+
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {data.categories && data.categories.map((category, index) => {
+                if(index !== 4) {
+                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-1/5 px-4 mr-2"
+                        key={index}>
+                    <IconFont5
+                      name={categoryIcons[category.categoryName]}
+                      size={20}
+                      color="rgb(23 37 84)"
+                    />
+                    <Text className="text-blue-800 text-xs">{category.categoryName.substr(0, 7)}</Text>
+                    <Text className="text-blue-800 text-xs">{Math.round(category.answerPercentage * 100)}%</Text>
+                  </View> )
+                } else {
+                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-1/5 px-6"
+                        key={index}>
+                    <IconFont5
+                      name={categoryIcons[category.categoryName]}
+                      size={24}
+                      color="rgb(23 37 84)"
+                    />
+                    <Text className="text-blue-800">{category.categoryName}</Text>
+                    <Text className="text-blue-800">{Math.round(category.answerPercentage * 100)}%</Text>
+                  </View>)
+                }
+            })}
+          </ScrollView>
+
         </View>
         <View className="absolute top-20 bg-white p-1 rounded-full">
           <Image

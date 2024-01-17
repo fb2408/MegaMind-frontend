@@ -15,7 +15,9 @@ export default function Home({navigation}) {
     History: 'book-open',
     Music: 'music',
     Sport: 'trophy',
-    Art: 'palette'
+    Art: 'palette',
+    Geography: 'globe-americas',
+    Movies: 'film'
   }
 
   useEffect(()=>{
