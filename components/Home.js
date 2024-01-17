@@ -114,7 +114,7 @@ export default function Home({navigation}) {
           </View>
         </View>
       </ScrollView>
-      <Footer navigation={navigation}/>
+      <Footer navigation={navigation} current="home"/>
     </View>
   );
 }

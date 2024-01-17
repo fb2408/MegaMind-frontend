@@ -50,7 +50,7 @@ export default function Leagues({navigation}) {
           }
         </View>
       </ScrollView>
-      <Footer navigation={navigation} />
+      <Footer navigation={navigation} current="leagues"/>
     </View>
   );
 }

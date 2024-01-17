@@ -6,10 +6,13 @@ import Header from './components/Header';
 import Home from './components/Home';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Leagues from './components/Leagues';
 import League from './components/League';
+import Profile from './components/Profile';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
@@ -28,6 +31,11 @@ export default function App() {
         <Stack.Screen
           name='League'
           component={League}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name='Profile'
+          component={Profile}
           options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>

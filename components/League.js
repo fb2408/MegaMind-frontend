@@ -57,7 +57,7 @@ const persons = [
 
 const quizDone = false;
 
-export default function League() {
+export default function League({navigation}) {
 
   persons.sort((a, b) => b.points - a.points);
 
@@ -159,7 +159,7 @@ export default function League() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <Footer />
+      <Footer navigation={navigation} current="leagues"/>
     </View>
   );
 }
