@@ -92,7 +92,7 @@ export default function Home({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32'>
-              <IconE
+              <Icon
                 name='trophy'
                 size={50}
                 color='#172554'
@@ -126,7 +126,7 @@ export default function Home({navigation}) {
           </View>
         </View>
       </ScrollView>
-      <Footer navigation={navigation}/>
+      <Footer navigation={navigation} current="home"/>
     </View>
   );
 }

@@ -41,11 +41,13 @@ export default function Leagues({navigation}) {
           <Text className='font-black text-3xl text-blue-950 mb-4'>My leagues</Text>
           {leagues.map((league, index) => {
             return (
-              <TouchableHighlight className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
+              <TouchableOpacity className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
                     onPress={() => navigation.navigate('League')}
-                    key={index}>
+                    key={index}
+                    activeOpacity={0.4}
+              >
                 <Text className='font-bold text-lg text-blue-950'>{league.name}</Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
             );
           })}
           <View className='flex-row justify-around items-center my-8 w-full'>
@@ -69,7 +71,7 @@ export default function Leagues({navigation}) {
           }
         </View>
       </ScrollView>
-      <Footer navigation={navigation} />
+      <Footer navigation={navigation} current="leagues"/>
     </View>
   );
 }
