@@ -10,6 +10,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Leagues from './components/Leagues';
 import League from './components/League';
 import Profile from './components/Profile';
+import SelectCategories from "./components/SelectCategories";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,6 +38,11 @@ export default function App() {
           name='Profile'
           component={Profile}
           options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+            name='SelectCategories'
+            component={SelectCategories}
+            options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

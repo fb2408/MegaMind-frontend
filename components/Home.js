@@ -6,6 +6,7 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconE from 'react-native-vector-icons/Entypo';
 import {getHomePageData} from "../stores/homeStore";
 import Footer from './Footer'
+import SelectCategories from "./SelectCategories";
 
 export default function Home({navigation}) {
   const [homeData, setHomeData] = useState({});
@@ -88,20 +89,22 @@ export default function Home({navigation}) {
           <View className='flex flex-row justify-between w-full items-center flex-wrap'>
             {homeData.favouriteCategories && homeData.favouriteCategories.map(cat => (
                 <TouchableOpacity
-                    className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32'>
+                    className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32'
+                    key={cat.categoryName}>
                   <Icon
-                      name={categoryIcons[cat]}
+                      name={categoryIcons[cat.categoryName]}
                       size={50}
                       color='#172554'
                   />
                   <Text className='text-blue-950 text-lg font-bold'>
-                    {cat}
+                    {cat.categoryName}
                   </Text>
                 </TouchableOpacity>
 
             ))}
             <TouchableOpacity
-              className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-7'>
+              className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-7'
+                onPress={() => navigation.navigate('SelectCategories', {selected: homeData.favouriteCategories.map(cat => cat.categoryName)})}>
               <Icon
                 name='plus'
                 size={50}

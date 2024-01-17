@@ -2,75 +2,33 @@ import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Footer from './Footer';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/FontAwesome5';
-
-const persons = [
-  {
-    name: 'Ante',
-    surname: 'Dražić',
-    points: 544,
-    image: 'image',
-    up: 1,
-  },
-  {
-    name: 'Mate',
-    surname: 'Ivić',
-    points: 621,
-    image: 'image',
-    up: -1,
-  },
-  {
-    name: 'Marko',
-    surname: 'Žura',
-    points: 698,
-    image: 'image',
-    up: 0,
-  },
-  {
-    name: 'Filip',
-    surname: 'Bura',
-    points: 500,
-    image: 'image',
-    up: 1,
-  },
-  {
-    name: 'Zvonimir',
-    surname: 'Ravlić',
-    points: 499,
-    image: 'image',
-    up: 0,
-  },
-  {
-    name: 'Luka',
-    surname: 'Gjurić',
-    points: 634,
-    image: 'image',
-    up: -1,
-  },
-  {
-    name: 'Miki',
-    surname: 'Rapaić',
-    points: 250,
-    image: 'image',
-    up: -1,
-  },
-];
+import {getLeaugesForUser, getOneLeagueForUser} from "../stores/leagueStore";
+import {useEffect, useState} from "react";
 
 const quizDone = false;
 
-export default function League({navigation}) {
+export default function League({route, navigation}) {
 
   persons.sort((a, b) => b.points - a.points);
+  const { userId, leagueId } = route.params;
+  const [leagueData, setLeagueData] = useState({});
+  const [firstThree, setFirstThree] = useState(null);
 
-  const arrayCopy = [];
-  let elem = persons[1];
-  elem.order = 2;
-  arrayCopy.push(elem);
-  elem = persons[0];
-  elem.order = 1;
-  arrayCopy.push(elem);
-  elem = persons[2];
-  elem.order = 3;
-  arrayCopy.push(elem);
+  useEffect(()=> {
+    getOneLeagueForUser(userId, leagueId).then(res => {
+      res.users.sort((a, b) => b.score - a.score);
+      setLeagueData(res);
+      setFirstThreeOrder(res.users);
+    });
+  }, []);
+
+  function setFirstThreeOrder(users) {
+    let arr = [];
+    if (users.length > 1)  arr.push(users[1]);
+    if (users.length > 2) arr.push(users[0]);
+    if (users.length > 3) arr.push(users[2]);
+    setFirstThree(arr);
+  }
 
 
   return (
@@ -80,51 +38,51 @@ export default function League({navigation}) {
           <Text className='font-black text-3xl text-blue-950 mt-2 mb-6'>Leaderboard</Text>
           <Text className='font-bold text-lg text-blue-900 mb-6'>This week</Text>
           <View className='flex flex-row justify-between items-end w-full mb-6'>
-            {arrayCopy.map((person, index) => {
+            {firstThree && firstThree.map((person, index) => {
               if (index === 1) {
                 return (
                   <View className='flex justify-center items-center py-2 px-4 border-2 border-gray-300 rounded-3xl'
                         key={index}>
-                    <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.order}</Text>
+                    <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                     <Image
                       className='rounded-full w-24 h-24'
                       source={require('../public/icons/people_icon.jpg')
                       }
                     />
                     <Text
-                      className='text-lg font-bold text-blue-950 mt-4'>{person.name + ' ' + person.surname.substr(0, 1) + '.'}</Text>
-                    <Text className='text-blue-800'>{person.points} points</Text>
+                      className='text-lg font-bold text-blue-950 mt-4'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
+                    <Text className='text-blue-800'>{person.score} points</Text>
                   </View>
                 );
               }
               return (
                 <View className='flex justify-center items-center py-2 px-3 border-2 border-gray-300 rounded-3xl'
                       key={index}>
-                  <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.order}</Text>
+                  <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                   <Image
                     className='rounded-full w-16 h-16'
                     source={require('../public/icons/people_icon.jpg')
                     }
                   />
                   <Text
-                    className='text-lg font-bold text-blue-950 mt-4'>{person.name + ' ' + person.surname.substr(0, 1) + '.'}</Text>
-                  <Text className='text-blue-800'>{person.points} points</Text>
+                    className='text-lg font-bold text-blue-950 mt-4'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
+                  <Text className='text-blue-800'>{person.score} points</Text>
                 </View>
               );
             })}
           </View>
-          {persons.map((person, index) => {
+          {leagueData.users && leagueData.users.map((person, index) => {
             if (index > 2) {
               return (
                 <View className='flex flex-row items-center w-full border-2 border-gray-300 rounded-xl mb-5 p-2'
                       key={index}>
-                  <Text className='font-semibold text-blue-950 mr-4'>#{index + 1}</Text>
+                  <Text className='font-semibold text-blue-950 mr-4'>#{person.position}</Text>
                   <View className='flex flex-row items-center flex-1 justify-between'>
                     <View className='flex flex-row items-center'>
                       <Image source={require('../public/icons/people_icon.jpg')}
                              className='w-10 h-10 rounded-full mr-2' />
                       <Text
-                        className='font-semibold text-blue-950 text-base'>{person.name + ' ' + person.surname.substr(0, 1) + '.'}</Text>
+                        className='font-semibold text-blue-950 text-base'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
                     </View>
                     <View className='flex flex-row items-center'>
                       {person.up === -1 ? (
@@ -146,7 +104,7 @@ export default function League({navigation}) {
                           color='green'
                         />
                       )}
-                      <Text className='text-blue-800 mx-2'>{person.points} points</Text>
+                      <Text className='text-blue-800 mx-2'>{person.score} points</Text>
                     </View>
                   </View>
                 </View>
