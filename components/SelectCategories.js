@@ -9,7 +9,7 @@ export default function SelectCategories({route, navigation}) {
     return (
     <View className='flex-1'>
         <ScrollView>
-            <View className='flex flex-column justify-start items-stretch gap-5 m-5'>
+            <View className='flex-1 justify-start items-stretch gap-5 m-5'>
                 <TouchableOpacity
                     className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl h-14'
                     onPress={() => navigation.goBack()}>
@@ -39,8 +39,8 @@ export default function SelectCategories({route, navigation}) {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <Footer navigation={navigation} current="other"/>
         </ScrollView>
+        <Footer navigation={navigation} current="other"/>
     </View>
     );
 }
