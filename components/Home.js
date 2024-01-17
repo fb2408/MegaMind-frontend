@@ -10,6 +10,13 @@ import Footer from './Footer'
 export default function Home({navigation}) {
   const [homeData, setHomeData] = useState({});
 
+  const categoryIcons = {
+    History: 'book-open',
+    Music: 'music',
+    Sport: 'trophy',
+    Art: 'palette'
+  }
+
   useEffect(()=>{
     getHomePageData(4).then(res => {
       setHomeData(res);
@@ -78,40 +85,21 @@ export default function Home({navigation}) {
           <Text className='mt-6 text-blue-950 font-bold text-lg mb-2'>
             Favourite categories
           </Text>
-          <View className='flex flex-row justify-between w-full flex-wrap'>
-            <TouchableOpacity
-              className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32'>
-              <Icon
-                name='music'
-                size={50}
-                color='#172554'
-              />
-              <Text className='text-blue-950 text-lg font-bold'>
-                Music
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32'>
-              <IconE
-                name='trophy'
-                size={50}
-                color='#172554'
-              />
-              <Text className='text-blue-950 text-lg font-bold'>
-                Sport
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-7'>
-              <Icon
-                name='palette'
-                size={50}
-                color='#172554'
-              />
-              <Text className='text-blue-950 text-lg font-bold'>
-                Art
-              </Text>
-            </TouchableOpacity>
+          <View className='flex flex-row justify-between w-full items-center flex-wrap'>
+            {homeData.favouriteCategories && homeData.favouriteCategories.map(cat => (
+                <TouchableOpacity
+                    className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32'>
+                  <Icon
+                      name={categoryIcons[cat]}
+                      size={50}
+                      color='#172554'
+                  />
+                  <Text className='text-blue-950 text-lg font-bold'>
+                    {cat}
+                  </Text>
+                </TouchableOpacity>
+
+            ))}
             <TouchableOpacity
               className='flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-7'>
               <Icon

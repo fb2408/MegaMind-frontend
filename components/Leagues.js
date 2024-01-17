@@ -1,50 +1,31 @@
 import {ScrollView, Text, TextInput, TouchableHighlight, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Footer from './Footer';
-
-const leagues = [
-  {
-    'id': 1,
-    'name': 'Name of your first league',
-  },
-  {
-    'id': 2,
-    'name': 'Name of your second league',
-  },
-  {
-    'id': 3,
-    'name': 'Name of your third league',
-  },
-  {
-    'id': 4,
-    'name': 'Name of your forth league',
-  },
-  {
-    'id': 4,
-    'name': 'Name of your fifth league',
-  },
-  {
-    'id': 4,
-    'name': 'Name of your sixth league',
-  },
-];
+import {getLeaugesForUser} from "../stores/leagueStore";
 
 export default function Leagues({navigation}) {
 
   const [code, setCode] = useState('');
   const [visible, setVisible] = useState(false);
+  const [leagues, setLeagues] = useState({});
+
+  useEffect(()=>{
+    getLeaugesForUser(4).then(res => {
+      setLeagues(res);
+    });
+  },[]);
 
   return (
     <View className='flex-1'>
       <ScrollView>
         <View className='flex-1 justify-start items-start m-5'>
           <Text className='font-black text-3xl text-blue-950 mb-4'>My leagues</Text>
-          {leagues.map((league, index) => {
+          {leagues.leagues && leagues.leagues.map((league, index) => {
             return (
               <TouchableHighlight className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
-                    onPress={() => navigation.navigate('League')}
-                    key={index}>
-                <Text className='font-bold text-lg text-blue-950'>{league.name}</Text>
+                    onPress={() => navigation.navigate('League', {leagueId: league.leagueId, userId: 4})}
+                    key={league.leagueId}>
+                <Text className='font-bold text-lg text-blue-950'>{league.leagueName}</Text>
               </TouchableHighlight>
             );
           })}
