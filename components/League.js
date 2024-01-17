@@ -9,7 +9,6 @@ const quizDone = false;
 
 export default function League({route, navigation}) {
 
-  persons.sort((a, b) => b.points - a.points);
   const { userId, leagueId } = route.params;
   const [leagueData, setLeagueData] = useState({});
   const [firstThree, setFirstThree] = useState(null);
