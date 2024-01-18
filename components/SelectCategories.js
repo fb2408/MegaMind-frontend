@@ -5,7 +5,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {changeUser, getAllCategories,} from "../stores/homeStore";
 
 export default function SelectCategories({route, navigation}) {
-    const { selected, userId } = route.params;
+    const { selected, userId, username } = route.params;
     const [newSelected, setNewSelected] = useState([]);
     const [allCategories, setAllCategories] = useState(null);
 
@@ -77,7 +77,7 @@ export default function SelectCategories({route, navigation}) {
                     activeOpacity={0.6}
                     className='flex flex-col justify-evenly items-center bg-green-300 rounded-xl h-14'
                     onPress={() => {changeUser(userId, {favouriteCategoryIds: newSelected});
-                                    navigation.navigate('Home', {userId: userId})}}>
+                                    navigation.navigate('Home', {userId: userId, username: username})}}>
                     <Text className='text-blue-950 text-lg font-bold '>
                         Confirm
                     </Text>
@@ -85,14 +85,14 @@ export default function SelectCategories({route, navigation}) {
                 <TouchableOpacity
                     activeOpacity={0.6}
                     className='flex flex-col justify-evenly items-center bg-blue-400 rounded-xl h-14'
-                    onPress={() => navigation.navigate('Home', {userId: userId})}>
+                    onPress={() => navigation.navigate('Home', {userId: userId, username: username})}>
                     <Text className='text-blue-950 text-lg font-bold '>
                         Exit
                     </Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
-        <Footer navigation={navigation} current="other"/>
+        <Footer navigation={navigation} current="other" userId={userId} username={username}/>
     </View>
     );
 }
