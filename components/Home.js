@@ -31,7 +31,7 @@ export default function Home({navigation, route}) {
 
   useEffect(() => {
     if(isFocused){
-      getHomePageData(userId).then(res => {
+      getHomePageData(4).then(res => {
         setHomeData(res);
       });
     }

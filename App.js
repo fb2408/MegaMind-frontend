@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import SelectCategories from './components/SelectCategories';
 import QuizGame from './components/QuizGame';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,6 +53,11 @@ export default function App() {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
           options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>

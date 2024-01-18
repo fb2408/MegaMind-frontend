@@ -64,7 +64,9 @@ export default function Login({navigation}) {
               className="flex justify-center items-center bg-blue-400 mt-6 px-5 py-3 rounded-md">
               <Text className="text-white text-base font-semibold">Log in</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="flex justify-center items-center bg-gray-400 mt-6 ml-5 px-5 py-3 rounded-md">
+            <TouchableOpacity
+              onPress={() => navigation.navigate('SignUp')}
+              className="flex justify-center items-center bg-gray-400 mt-6 ml-5 px-5 py-3 rounded-md">
               <Text className="text-white text-base font-semibold">Sign up</Text>
             </TouchableOpacity>
           </View>
