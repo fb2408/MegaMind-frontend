@@ -2,7 +2,7 @@ import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useState} from 'react';
-import {loginPost} from '../stores/loginStore';
+import {loginPost, questionsPost} from '../stores/loginStore';
 
 export default function Login({navigation}) {
 
@@ -22,7 +22,6 @@ export default function Login({navigation}) {
         console.log(res)
       }
     })
-
   }
 
   return (
@@ -35,7 +34,7 @@ export default function Login({navigation}) {
           <Text className='text-white text-4xl mt-6' style={{fontFamily: 'ShantellSans-Bold'}}>MegaMind</Text>
           <Icon
             color="white"
-            name='dragon'
+            name='lightbulb'
             size={60}
           />
         </View>

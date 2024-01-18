@@ -1,7 +1,8 @@
 import {
-  Button,
+  Alert,
+  Button, Modal, Pressable,
   SafeAreaView,
-  ScrollView,
+  ScrollView, StyleSheet,
   Text,
   TextInput,
   TouchableHighlight,
@@ -28,6 +29,7 @@ export default function Leagues({navigation}) {
   const [open, setOpen] = useState(false);
   const [dailyCategories, setDailyCategories] = useState(0);
   const [questionsPerCategory, setQuestionsPerCategory] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
 
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function Leagues({navigation}) {
       leagueName: leagueName,
       leagueAdmin: 4,
       seasonLength: leagueLength,
-      startDate: date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate(),
+      startDate: date.toISOString().substr(0,10),
       dailyCategories: dailyCategories,
       questionsPerCategory: questionsPerCategory,
       leagueCategories: selectedCategories,
@@ -64,6 +66,15 @@ export default function Leagues({navigation}) {
       });
     });
   };
+
+  const handlePress = (categoryId) => {
+    if(selectedCategories.includes(categoryId)) {
+      const newCategories = selectedCategories.filter((id) => id !== categoryId);
+      setSelectedCategories(newCategories)
+    } else {
+      setSelectedCategories((prevCategories) => [...prevCategories, categoryId]);
+    }
+  }
 
   return (
     <View className='flex-1'>
@@ -138,31 +149,45 @@ export default function Leagues({navigation}) {
                   }}
                 />
                 <Text className='text-blue-800 mb-1 font-semibold mt-2'>Categories</Text>
-                <SafeAreaView>
-                  <MultiSelect
-                    hideTags
-                    items={categories}
-                    uniqueKey='id'
-                    onSelectedItemsChange={onSelectedItemsChange}
-                    selectedItems={selectedCategories}
-                    selectText='Pick Categories'
-                    searchInputPlaceholderText='Search Categories...'
-                    onChangeInput={(text) => console.log(text)}
-                    altFontFamily='ProximaNova-Light'
-                    tagRemoveIconColor='#CCC'
-                    tagBorderColor='#CCC'
-                    tagTextColor='#CCC'
-                    selectedItemTextColor='#CCC'
-                    selectedItemIconColor='#CCC'
-                    itemTextColor='#000'
-                    displayKey='name'
-                    searchInputStyle={{color: '#CCC'}}
-                    submitButtonColor='#CCC'
-                    submitButtonText='Save'
-                    styleDropdownMenuSubsection={{borderRadius: 2}}
-                    fixedHeight={true}
-                  />
-                </SafeAreaView>
+
+                <View className='flex justify-start items-start w-full'>
+                  <TouchableOpacity
+                    onPress={() => setModalVisible(true)}
+                    className="bg-blue-600 w-full flex justify-center items-center p-2 rounded-md">
+                    <Text className="text-white text-lg">Choose...</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={modalVisible}
+                  onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setModalVisible(!modalVisible);
+                  }}>
+                  <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                      <Text className="mb-2 text-blue-950 font-semibold text-lg">Choose categories</Text>
+                      {categories && categories.map((category, index) => {
+                        return(
+                          <Pressable
+                            style={{backgroundColor: selectedCategories.includes(category.id) ? "gray" : "rgb(23 37 84)"}}
+                            key={index}
+                            onPress={() => handlePress(category.id)}
+                            className="w-48 h-12 rounded-xl mb-2 flex justify-center items-center ">
+                            <Text className="text-white">{category.name}</Text>
+                          </Pressable>
+                        )
+                      })}
+                      <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={styles.textStyle}>Close</Text>
+                      </Pressable>
+                    </View>
+                  </View>
+                </Modal>
                 <Text className='text-blue-800 mb-1 font-semibold mt-2'>Daily categories</Text>
                 <TextInput onChangeText={setDailyCategories} placeholder='2'
                            keyboardType='numeric'
@@ -186,3 +211,47 @@ export default function Leagues({navigation}) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+});

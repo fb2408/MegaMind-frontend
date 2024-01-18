@@ -26,6 +26,11 @@ export default function Home({navigation, route}) {
     Art: 'palette',
     Geography: 'globe-americas',
     Movies: 'film',
+    Science: 'bacteria',
+    Food: 'drumstick-bite',
+    Technology: 'robot',
+    "Pop-culture": 'tv'
+
   };
   const isFocused = useIsFocused()
 

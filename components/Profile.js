@@ -16,6 +16,11 @@ export default function Profile({navigation}) {
     Art: 'palette',
     Geography: 'globe-americas',
     Movies: 'film',
+    Science: 'bacteria',
+    Food: 'drumstick-bite',
+    Technology: 'robot',
+    "Pop-culture": 'tv'
+
   };
 
   const [data, setData] = useState({});
