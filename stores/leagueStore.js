@@ -57,5 +57,25 @@ export async function createLeaguePost(data) {
     } catch (error) {
         console.error(error)
         return error;
+    }
 }
+
+export async function joinLeagueByCode(userId, code) {
+    try {
+        const response = await fetch(
+            `https://mega-mind-backend-2fe25339801f.herokuapp.com/league/${userId}/${code}`, {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }}
+        );
+        const json = await response.json();
+        console.log(response)
+        if(!response.ok) return false;
+        return true;
+    } catch (error) {
+        console.error(error);
+        return {};
+    }
 }

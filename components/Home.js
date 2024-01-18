@@ -17,7 +17,7 @@ import { useIsFocused } from '@react-navigation/native'
 
 export default function Home({navigation, route}) {
   const [homeData, setHomeData] = useState({});
-  const {userId} = route.params
+  const {userId, username} = route.params
 
   const categoryIcons = {
     History: 'book-open',
@@ -29,14 +29,13 @@ export default function Home({navigation, route}) {
     Science: 'bacteria',
     Food: 'drumstick-bite',
     Technology: 'robot',
-    "Pop-culture": 'tv'
-
+    Pop: 'tv'
   };
   const isFocused = useIsFocused()
 
   useEffect(() => {
     if(isFocused){
-      getHomePageData(4).then(res => {
+      getHomePageData(userId).then(res => {
         setHomeData(res);
       });
     }
@@ -47,14 +46,14 @@ export default function Home({navigation, route}) {
       <ScrollView>
         <View className="flex-1 justify-start items-start m-5">
           <Text className="text-base text-blue-800 mb-4" style={{fontFamily: "ShantellSans-Regular"}}>
-            Welcome back, {homeData.username && homeData.username}
+            Welcome back, {homeData.username}
           </Text>
           <Text className="text-4xl text-blue-950" style={{fontFamily: "ShantellSans-Bold"}}>Let's play!</Text>
           <View className="bg-blue-950 rounded-2xl p-5 w-full mt-7">
             <View className="flex flex-row justify-between items-center">
               <View className="flex flex-col justify-center items-center">
                 <Text className="text-white font-bold text-lg mb-3">
-                  {homeData.daysInARow && homeData.daysInARow} days strike!
+                  {homeData.daysInARow} days strike!
                 </Text>
                 <View className="flex justify-start items-center flex-row">
                   <Icon name="gem" size={14} color="white" />
@@ -87,8 +86,10 @@ export default function Home({navigation, route}) {
                       className="text-white"
                       onPress={() =>
                         navigation.navigate('QuizGame', {
-                          userId: 4,
+                          userId: userId,
                           leagueId: 1,
+                          username: username,
+                          isLeagueQuiz: true
                         })
                       }
                     >
@@ -113,6 +114,14 @@ export default function Home({navigation, route}) {
             {homeData.favouriteCategories &&
               homeData.favouriteCategories.map(cat => (
                 <TouchableOpacity
+                  disabled={cat.dailyDone}
+                  onPress={() =>
+                      navigation.navigate('QuizGame', {
+                        userId: userId,
+                        categoryId: cat.categoryId,
+                        isLeagueQuiz: false,
+                        username: username
+                      })}
                   className="flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32"
                   key={cat.categoryId}>
                   <Icon
@@ -129,18 +138,19 @@ export default function Home({navigation, route}) {
               className="flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-7"
               onPress={() =>
                 navigation.navigate('SelectCategories', {
-                  selected: homeData.favouriteCategories.map(
-                    cat => cat.categoryId,
-                  ),
+                  selected: homeData.favouriteCategories ? homeData.favouriteCategories.map(
+                    cat => cat.categoryId) : [],
+                  userId: userId,
+                  username: username
                 })
               }>
-              <Icon name="plus" size={50} color="#172554" />
-              <Text className="text-blue-950 text-lg font-bold ">Add new</Text>
+              <Icon name="pen" size={50} color="#172554" />
+              <Text className="text-blue-950 text-lg font-bold ">Edit</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
-      <Footer navigation={navigation} current="home" />
+      <Footer navigation={navigation} current="home" userId={userId} username={username}/>
     </View>
   );
 }

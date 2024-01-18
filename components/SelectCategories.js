@@ -5,9 +5,15 @@ import React, {useCallback, useEffect, useState} from "react";
 import {changeUser, getAllCategories,} from "../stores/homeStore";
 
 export default function SelectCategories({route, navigation}) {
-    const { selected } = route.params;
+    const { selected, userId } = route.params;
     const [newSelected, setNewSelected] = useState([]);
     const [allCategories, setAllCategories] = useState(null);
+
+    const [selectedHistory, setSelectedHistory] = useState(false);
+    const [selectedSport, setSelectedSport] = useState(false);
+    const [selectedMovies, setSelectedMovies] = useState(false);
+    const [selectedGeography, setSelectedGeography] = useState(false);
+    const [selectedMusic, setSelectedMusic] = useState(false);
 
     const isFocused = useIsFocused()
 
@@ -17,8 +23,6 @@ export default function SelectCategories({route, navigation}) {
                 setAllCategories(res.categories);
                 setNewSelected(selected);
             });
-            console.log(navigation)
-            console.log(route)
         }
     }, [isFocused])
 
@@ -33,13 +37,14 @@ export default function SelectCategories({route, navigation}) {
 
 
     function handleSelectedCategories(categoryId) {
-        if (newSelected.includes(categoryId)) {
+        let temp = [...newSelected];
+        if (newSelected && newSelected.includes(categoryId)) {
             let idx = newSelected.indexOf(categoryId);
-            setNewSelected(old => {old.splice(idx, 1);
-                                        return old});
+            temp.splice(idx, 1);
+            setNewSelected(temp);
         } else {
-            setNewSelected(old => {old.push(categoryId);
-                                        return old;});
+            temp.push(categoryId);
+            setNewSelected(temp);
         }
     }
 
@@ -48,10 +53,12 @@ export default function SelectCategories({route, navigation}) {
         <ScrollView>
             <View className='flex-1 justify-start items-stretch gap-5 m-5'>
                 {allCategories && allCategories.map(cat => (
-                    newSelected.includes(cat.id) ? (
+                    newSelected && newSelected.includes(cat.id) ? (
                         <TouchableOpacity
                             className="flex flex-col justify-evenly items-center border-2 rounded-xl h-14 border-green-400"
-                            onPress={() => handleSelectedCategories(cat.id)}>
+                            onPress={() => handleSelectedCategories(cat.id)}
+                            key={cat.id}
+                        >
                             <Text className='text-blue-950 text-lg font-bold '>
                                 {cat.name}
                             </Text>
@@ -69,8 +76,8 @@ export default function SelectCategories({route, navigation}) {
                 <TouchableOpacity
                     activeOpacity={0.6}
                     className='flex flex-col justify-evenly items-center bg-green-300 rounded-xl h-14'
-                    onPress={() => {changeUser(4, {favouriteCategoryIds: newSelected});
-                                    navigation.navigate('Home')}}>
+                    onPress={() => {changeUser(userId, {favouriteCategoryIds: newSelected});
+                                    navigation.navigate('Home', {userId: userId})}}>
                     <Text className='text-blue-950 text-lg font-bold '>
                         Confirm
                     </Text>
@@ -78,7 +85,7 @@ export default function SelectCategories({route, navigation}) {
                 <TouchableOpacity
                     activeOpacity={0.6}
                     className='flex flex-col justify-evenly items-center bg-blue-400 rounded-xl h-14'
-                    onPress={() => navigation.navigate('Home')}>
+                    onPress={() => navigation.navigate('Home', {userId: userId})}>
                     <Text className='text-blue-950 text-lg font-bold '>
                         Exit
                     </Text>

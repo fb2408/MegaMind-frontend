@@ -4,7 +4,7 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconFontisto from 'react-native-vector-icons/Fontisto';
 
-export default function Footer({navigation, current}) {
+export default function Footer({navigation, current, userId, username}) {
 
   const colorMapping = {
     home: { home: '#FFDB58', leagues: 'white', person: 'white' },
@@ -17,13 +17,13 @@ export default function Footer({navigation, current}) {
 
   return (
     <View className='flex-row justify-around items-center h-12 bg-blue-950'>
-      <Pressable onPress={() => navigation.navigate('Home')}>
+      <Pressable onPress={() => navigation.navigate('Home', {userId: userId, username: username})}>
         <Icon name="home" size={28} color={getIconColor('home')} />
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('Leagues')}>
+      <Pressable onPress={() => navigation.navigate('Leagues', {userId: userId, username: username})}>
         <IconAnt name="profile" size={28} color={getIconColor('leagues')} />
       </Pressable>
-      <Pressable onPress={() => navigation.navigate('Profile')}>
+      <Pressable onPress={() => navigation.navigate('Profile', {userId: userId, username: username})}>
         <IconFontisto name="person" size={28} color={getIconColor('person')} />
       </Pressable>
     </View>

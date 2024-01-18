@@ -11,12 +11,13 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Footer from './Footer';
-import {createLeaguePost, getCategoriesForLeague, getLeaugesForUser} from '../stores/leagueStore';
+import {createLeaguePost, getCategoriesForLeague, getLeaugesForUser, joinLeagueByCode} from '../stores/leagueStore';
 import MultiSelect from 'react-native-multiple-select';
 import DatePicker from 'react-native-date-picker';
 
-export default function Leagues({navigation}) {
+export default function Leagues({navigation, route}) {
 
+  const { userId, username } = route.params;
   const [code, setCode] = useState('');
   const [leagueName, setLeagueName] = useState('');
   const [visibleJoin, setVisibleJoin] = useState(false);
@@ -29,11 +30,13 @@ export default function Leagues({navigation}) {
   const [open, setOpen] = useState(false);
   const [dailyCategories, setDailyCategories] = useState(0);
   const [questionsPerCategory, setQuestionsPerCategory] = useState(0);
+  const[joinedLeague, setJoinedLeague] = useState(false);
+  const[notJoinedLeague, setNotJoinedLeague] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
 
   useEffect(() => {
-    getLeaugesForUser(4).then(res => {
+    getLeaugesForUser(userId).then(res => {
       setLeagues(res);
     });
     getCategoriesForLeague().then(res => {
@@ -61,11 +64,27 @@ export default function Leagues({navigation}) {
       console.log(res);
       setVisibleCreate(false);
       setSelectedCategories([]);
-      getLeaugesForUser(4).then(res => {
+      getLeaugesForUser(userId).then(res => {
         setLeagues(res);
       });
     });
   };
+
+  function handleJoinByCode() {
+    if (code) {
+      joinLeagueByCode(userId, code).then(res => {
+        if(res) {
+          getLeaugesForUser(userId).then(res => {
+            setLeagues(res);
+          });
+          setJoinedLeague(true);
+          setTimeout(() => setJoinedLeague(false), 3000);
+        } else {
+          setNotJoinedLeague(true);
+          setTimeout(() => setNotJoinedLeague(false), 3000);
+        }})
+    }
+  }
 
   const handlePress = (categoryId) => {
     if(selectedCategories.includes(categoryId)) {
@@ -81,11 +100,12 @@ export default function Leagues({navigation}) {
       <ScrollView>
         <View className='flex-1 justify-start items-start m-5'>
           <Text className='font-black text-3xl text-blue-950 mb-4'>My leagues</Text>
-          {leagues.leagues && leagues.leagues.map((league, index) => {
+          {leagues.leagues && leagues.leagues.sort((a, b) => a.leagueId - b.leagueId)
+              .map((league, index) => {
             return (
               <TouchableOpacity activeOpacity={0.4}
                                 className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
-                                onPress={() => navigation.navigate('League', {leagueId: league.leagueId, userId: 4})}
+                                onPress={() => navigation.navigate('League', {leagueId: league.leagueId, userId: userId, username: username})}
                                 key={league.leagueId}>
                 <Text className='font-bold text-lg text-blue-950'>{league.leagueName}</Text>
               </TouchableOpacity>
@@ -111,12 +131,27 @@ export default function Leagues({navigation}) {
             </TouchableOpacity>
           </View>
           {
-            visibleJoin ?
-              <View className='w-full border-2 border-gray-300 rounded-2xl p-3'>
+            visibleJoin &&
+            (<View className='w-full border-2 border-gray-300 rounded-2xl p-3'>
                 <Text className='text-blue-950 font-bold text-lg mb-2'>Provide a code</Text>
                 <TextInput onChangeText={setCode} placeholder='Code'
                            className='border-2 border-blue-950 rounded-md h-10 p-2' />
-              </View> : <></>
+                {joinedLeague && (
+                    <Text className='text-green-800 font-bold mb-2'>League joined successfully!</Text>
+                )}
+                {notJoinedLeague && (
+                    <Text className='text-red-800 font-bold text-lg mb-2'>League with that code doesn't exist.</Text>
+                )}
+                <View className='flex-row w-[100%] justify-center items-center mt-2'>
+                  <TouchableOpacity activeOpacity={0.6}
+                                    className='w-1/2 bg-blue-300 rounded-md flex items-center justify-center py-3 my-2'
+                                    onPress={handleJoinByCode}
+                  >
+                    <Text className='font-bold text-lg text-blue-950'>Join</Text>
+                  </TouchableOpacity>
+                </View>
+
+              </View>)
           }
           {
             visibleCreate ?
@@ -207,7 +242,7 @@ export default function Leagues({navigation}) {
           }
         </View>
       </ScrollView>
-      <Footer navigation={navigation} current='leagues' />
+      <Footer navigation={navigation} current='leagues' userId={userId} username={username}/>
     </View>
   );
 }

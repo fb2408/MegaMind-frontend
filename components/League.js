@@ -5,22 +5,29 @@ import IconF from 'react-native-vector-icons/FontAwesome5';
 import {getLeaugesForUser, getOneLeagueForUser} from "../stores/leagueStore";
 import {useEffect, useState} from "react";
 import Clipboard from '@react-native-clipboard/clipboard';
+import { useIsFocused } from '@react-navigation/native'
 
 const quizDone = false;
 
 export default function League({route, navigation}) {
 
-  const { userId, leagueId } = route.params;
+  const { userId, leagueId, username } = route.params;
   const [leagueData, setLeagueData] = useState({});
   const [firstThree, setFirstThree] = useState(null);
+  const isFocused = useIsFocused()
+  const [userOnLeaderBoard, setUserOnLeaderBoard] = useState(false);
 
-  useEffect(()=> {
-    getOneLeagueForUser(userId, leagueId).then(res => {
-      res.users.sort((a, b) => b.score - a.score);
-      setLeagueData(res);
-      setFirstThreeOrder(res.users);
-    });
-  }, []);
+  useEffect(() => {
+    if(isFocused){
+      getOneLeagueForUser(userId, leagueId).then(res => {
+        res.users.sort((a, b) => b.score - a.score);
+        setLeagueData(res);
+        setFirstThreeOrder(res.users);
+        let leaderboardUsers = res.users.slice(0, 7);
+        leaderboardUsers.forEach(user => user.username === username && setUserOnLeaderBoard(true));
+      });
+    }
+  }, [isFocused]);
 
   function setFirstThreeOrder(users) {
     let arr = [];
@@ -36,12 +43,12 @@ export default function League({route, navigation}) {
       <ScrollView>
         <View className='m-5 flex-1 flex items-center'>
           <Text className='font-black text-3xl text-blue-950 mt-2 mb-6'>Leaderboard</Text>
-          <Text className='font-bold text-lg text-blue-900 mb-6'>This week</Text>
+          <Text className='font-bold text-lg text-blue-900 mb-6'>Today</Text>
           <View className='flex flex-row justify-between items-end w-full mb-6'>
             {firstThree && firstThree.map((person, index) => {
               if (index === 1) {
                 return (
-                  <View className='flex justify-center items-center py-2 px-4 border-2 border-gray-300 rounded-3xl'
+                  <View className={'flex justify-center items-center py-2 px-4 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
                         key={index}>
                     <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                     <Image
@@ -52,11 +59,12 @@ export default function League({route, navigation}) {
                     <Text
                       className='text-lg font-bold text-blue-950 mt-4'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
                     <Text className='text-blue-800'>{person.score} points</Text>
+                    <Text className='text-blue-800'>{username} points</Text>
                   </View>
                 );
               }
               return (
-                <View className='flex justify-center items-center py-2 px-3 border-2 border-gray-300 rounded-3xl'
+                <View className={'flex justify-center items-center py-2 px-3 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
                       key={index}>
                   <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                   <Image
@@ -71,10 +79,10 @@ export default function League({route, navigation}) {
               );
             })}
           </View>
-          {leagueData.users && leagueData.users.map((person, index) => {
+          {leagueData.users && leagueData.users.slice(0, 6).map((person, index) => {
             if (index > 2) {
               return (
-                <View className='flex flex-row items-center w-full border-2 border-gray-300 rounded-xl mb-5 p-2'
+                <View className={'flex flex-row items-center w-full border-2 border-gray-300 rounded-xl mb-5 p-2 ' + (person.username == username ? 'border-green-300' : '')}
                       key={index}>
                   <Text className='font-semibold text-blue-950 mr-4'>#{person.position}</Text>
                   <View className='flex flex-row items-center flex-1 justify-between'>
@@ -118,22 +126,25 @@ export default function League({route, navigation}) {
                     navigation.navigate('QuizGame', {
                       userId: userId,
                       leagueId: leagueId,
+                      username: username
                     })
             }>Play!</Text>
           </TouchableOpacity>
-          <View className='p-10 items-center justify-center'>
-            <Text className="font-bold text-xl text-blue-900 mb-4">Invite friends with code!</Text>
-            <TouchableOpacity onPress={() => Clipboard.setString(leagueData.invitationCode)}>
-              <View>
-                <Text className='font-bold text-xl font-light text-blue-800'>
-                  {leagueData.invitationCode}
-              </Text>
+          {leagueId !== 1 && (
+              <View className='p-10 items-center justify-center'>
+                <Text className="font-bold text-xl text-blue-900 mb-4">Invite friends with code!</Text>
+                <TouchableOpacity onPress={() => Clipboard.setString(leagueData.invitationCode)}>
+                  <View>
+                    <Text className='font-bold text-xl font-light text-blue-800'>
+                      {leagueData.invitationCode}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               </View>
-            </TouchableOpacity>
-          </View>
+          )}
         </View>
       </ScrollView>
-      <Footer navigation={navigation} current="leagues"/>
+      <Footer navigation={navigation} current="leagues" userId={userId} username={username}/>
     </View>
   );
 }

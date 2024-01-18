@@ -17,7 +17,7 @@ export default function Login({navigation}) {
     }
     loginPost(data).then(res => {
       if(res.userId !== undefined) {
-        navigation.navigate('Home', {userId: res.userId})
+        navigation.navigate('Home', {userId: res.userId, username: res.username});
       } else {
         console.log(res)
       }
