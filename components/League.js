@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/FontAwesome5';
 import {getLeaugesForUser, getOneLeagueForUser} from "../stores/leagueStore";
 import {useEffect, useState} from "react";
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const quizDone = false;
 
@@ -120,6 +121,16 @@ export default function League({route, navigation}) {
                     })
             }>Play!</Text>
           </TouchableOpacity>
+          <View className='p-10 items-center justify-center'>
+            <Text className="font-bold text-xl text-blue-900 mb-4">Invite friends with code!</Text>
+            <TouchableOpacity onPress={() => Clipboard.setString(leagueData.invitationCode)}>
+              <View>
+                <Text className='font-bold text-xl font-light text-blue-800'>
+                  {leagueData.invitationCode}
+              </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
       <Footer navigation={navigation} current="leagues"/>
