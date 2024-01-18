@@ -45,7 +45,7 @@ export default function League({route, navigation}) {
                     <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                     <Image
                       className='rounded-full w-24 h-24'
-                      source={require('../public/icons/people_icon.jpg')
+                      source={require('../public/icons/head_3.png')
                       }
                     />
                     <Text
@@ -60,7 +60,7 @@ export default function League({route, navigation}) {
                   <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                   <Image
                     className='rounded-full w-16 h-16'
-                    source={require('../public/icons/people_icon.jpg')
+                    source={require('../public/icons/head_3.png')
                     }
                   />
                   <Text
@@ -78,7 +78,7 @@ export default function League({route, navigation}) {
                   <Text className='font-semibold text-blue-950 mr-4'>#{person.position}</Text>
                   <View className='flex flex-row items-center flex-1 justify-between'>
                     <View className='flex flex-row items-center'>
-                      <Image source={require('../public/icons/people_icon.jpg')}
+                      <Image source={require('../public/icons/head_3.png')}
                              className='w-10 h-10 rounded-full mr-2' />
                       <Text
                         className='font-semibold text-blue-950 text-base'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>

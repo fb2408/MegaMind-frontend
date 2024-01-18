@@ -1,8 +1,18 @@
-import {ScrollView, Text, TextInput, TouchableHighlight, TouchableOpacity, View} from 'react-native';
+import {
+  Button,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Footer from './Footer';
-import {getCategoriesForLeague, getLeaugesForUser} from '../stores/leagueStore';
+import {createLeaguePost, getCategoriesForLeague, getLeaugesForUser} from '../stores/leagueStore';
 import MultiSelect from 'react-native-multiple-select';
+import DatePicker from 'react-native-date-picker';
 
 export default function Leagues({navigation}) {
 
@@ -13,22 +23,47 @@ export default function Leagues({navigation}) {
   const [leagues, setLeagues] = useState({});
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [leagueLength, setLeagueLength] = useState(0);
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  const [dailyCategories, setDailyCategories] = useState(0);
+  const [questionsPerCategory, setQuestionsPerCategory] = useState(0);
 
 
-  useEffect(()=>{
+  useEffect(() => {
     getLeaugesForUser(4).then(res => {
       setLeagues(res);
     });
     getCategoriesForLeague().then(res => {
-      setCategories(res.categories)
+      setCategories(res.categories);
     });
-  },[]);
+  }, []);
 
 
   const onSelectedItemsChange = (selectedCategories) => {
-    setSelectedCategories(selectedCategories)
-    console.log(selectedCategories)
-  }
+    setSelectedCategories(selectedCategories);
+    console.log(selectedCategories);
+  };
+
+  const createLeague = () => {
+    const data = {
+      leagueName: leagueName,
+      leagueAdmin: 4,
+      seasonLength: leagueLength,
+      startDate: date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate(),
+      dailyCategories: dailyCategories,
+      questionsPerCategory: questionsPerCategory,
+      leagueCategories: selectedCategories,
+    };
+    createLeaguePost(data).then(res => {
+      console.log(res);
+      setVisibleCreate(false);
+      setSelectedCategories([]);
+      getLeaugesForUser(4).then(res => {
+        setLeagues(res);
+      });
+    });
+  };
 
   return (
     <View className='flex-1'>
@@ -37,9 +72,10 @@ export default function Leagues({navigation}) {
           <Text className='font-black text-3xl text-blue-950 mb-4'>My leagues</Text>
           {leagues.leagues && leagues.leagues.map((league, index) => {
             return (
-              <TouchableOpacity activeOpacity={0.4} className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
-                    onPress={() => navigation.navigate('League', {leagueId: league.leagueId, userId: 4})}
-                    key={league.leagueId}>
+              <TouchableOpacity activeOpacity={0.4}
+                                className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
+                                onPress={() => navigation.navigate('League', {leagueId: league.leagueId, userId: 4})}
+                                key={league.leagueId}>
                 <Text className='font-bold text-lg text-blue-950'>{league.leagueName}</Text>
               </TouchableOpacity>
             );
@@ -48,16 +84,17 @@ export default function Leagues({navigation}) {
             <TouchableOpacity activeOpacity={0.6}
                               className='bg-blue-300 rounded-md w-2/5 flex items-center justify-center py-3'
                               onPress={() => {
-                                setVisibleJoin(!visibleJoin)
-                                setVisibleCreate(false)
+                                setVisibleJoin(!visibleJoin);
+                                setVisibleCreate(false);
                               }}>
               <Text className='font-bold text-lg text-blue-950'>Join league</Text>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={0.6}
                               className='bg-blue-300 rounded-md w-2/5 flex items-center justify-center py-3'
                               onPress={() => {
-                                setVisibleCreate(!visibleCreate)
-                                setVisibleJoin(false)
+                                setVisibleCreate(!visibleCreate);
+                                setVisibleJoin(false);
+                                setDate(new Date());
                               }}>
               <Text className='font-bold text-lg text-blue-950'>Create league</Text>
             </TouchableOpacity>
@@ -74,45 +111,78 @@ export default function Leagues({navigation}) {
             visibleCreate ?
               <View className='w-full border-2 border-gray-300 rounded-2xl p-3'>
                 <Text className='text-blue-950 font-bold text-lg mb-2'>Create a new league</Text>
+                <Text className='text-blue-800 mb-1 font-semibold'>Name</Text>
                 <TextInput onChangeText={setLeagueName} placeholder='League name'
-                           className='border-2 border-blue-950 rounded-md h-10 p-2 mb-4' />
-
-                <MultiSelect
-                  hideTags
-                  items={categories}
-                  uniqueKey="id"
-                  onSelectedItemsChange={onSelectedItemsChange}
-                  selectedItems={selectedCategories}
-                  selectText="Pick Categories"
-                  searchInputPlaceholderText="Search Categories..."
-                  onChangeInput={ (text)=> console.log(text)}
-                  altFontFamily="ProximaNova-Light"
-                  tagRemoveIconColor="#CCC"
-                  tagBorderColor="#CCC"
-                  tagTextColor="#CCC"
-                  selectedItemTextColor="#CCC"
-                  selectedItemIconColor="#CCC"
-                  itemTextColor="#000"
-                  displayKey="name"
-                  searchInputStyle={{ color: '#CCC' }}
-                  submitButtonColor="#CCC"
-                  submitButtonText="Submit"
-                  styleDropdownMenuSubsection={{borderRadius: 2}}
+                           className='border-2 border-blue-950 rounded-md h-10 p-2 mb-2' />
+                <Text className='text-blue-800 mb-1 font-semibold'>Length</Text>
+                <TextInput onChangeText={setLeagueLength} placeholder='(days)'
+                           keyboardType='numeric'
+                           className='border-2 border-blue-950 rounded-md h-10 p-2 mb-2'
                 />
-                {
-                  selectedCategories && selectedCategories.map((cat, index) => {
-                    return(
-                      <View>
-                        <Text>{categories[cat - 1].name}</Text>
-                      </View>
-                    )
-                  })
-                }
+                <Text className='text-blue-800 mb-1 font-semibold'>Start date</Text>
+                <TouchableOpacity
+                  className='bg-blue-300 rounded-md w-full flex items-center justify-center py-2'
+                  activeOpacity={0.6} onPress={() => setOpen(true)}>
+                  <Text className='font-bold text-base text-blue-950'>Pick a date</Text>
+                </TouchableOpacity>
+                <DatePicker
+                  modal
+                  open={open}
+                  date={date}
+                  onConfirm={(date) => {
+                    setOpen(false);
+                    setDate(date);
+                  }}
+                  onCancel={() => {
+                    setOpen(false);
+                  }}
+                />
+                <Text className='text-blue-800 mb-1 font-semibold mt-2'>Categories</Text>
+                <SafeAreaView>
+                  <MultiSelect
+                    hideTags
+                    items={categories}
+                    uniqueKey='id'
+                    onSelectedItemsChange={onSelectedItemsChange}
+                    selectedItems={selectedCategories}
+                    selectText='Pick Categories'
+                    searchInputPlaceholderText='Search Categories...'
+                    onChangeInput={(text) => console.log(text)}
+                    altFontFamily='ProximaNova-Light'
+                    tagRemoveIconColor='#CCC'
+                    tagBorderColor='#CCC'
+                    tagTextColor='#CCC'
+                    selectedItemTextColor='#CCC'
+                    selectedItemIconColor='#CCC'
+                    itemTextColor='#000'
+                    displayKey='name'
+                    searchInputStyle={{color: '#CCC'}}
+                    submitButtonColor='#CCC'
+                    submitButtonText='Save'
+                    styleDropdownMenuSubsection={{borderRadius: 2}}
+                    fixedHeight={true}
+                  />
+                </SafeAreaView>
+                <Text className='text-blue-800 mb-1 font-semibold mt-2'>Daily categories</Text>
+                <TextInput onChangeText={setDailyCategories} placeholder='2'
+                           keyboardType='numeric'
+                           className='border-2 border-blue-950 rounded-md h-10 p-2 mb-2'
+                />
+                <Text className='text-blue-800 mb-1 font-semibold'>Questions per category</Text>
+                <TextInput onChangeText={setQuestionsPerCategory} placeholder='5'
+                           keyboardType='numeric'
+                           className='border-2 border-blue-950 rounded-md h-10 p-2 mb-2'
+                />
+                <TouchableOpacity
+                  className='bg-green-300 rounded-md w-full flex items-center justify-center py-2 my-3'
+                  activeOpacity={0.6} onPress={() => createLeague()}>
+                  <Text className='font-bold text-base text-blue-950'>Create</Text>
+                </TouchableOpacity>
               </View> : <></>
           }
         </View>
       </ScrollView>
-      <Footer navigation={navigation} current="leagues"/>
+      <Footer navigation={navigation} current='leagues' />
     </View>
   );
 }

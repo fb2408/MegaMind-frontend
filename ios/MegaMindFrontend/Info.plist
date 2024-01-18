@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -51,5 +51,27 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AveriaSansLibre-Bold.ttf</string>
+		<string>AveriaSansLibre-BoldItalic.ttf</string>
+		<string>AveriaSansLibre-Italic.ttf</string>
+		<string>AveriaSansLibre-Light.ttf</string>
+		<string>AveriaSansLibre-LightItalic.ttf</string>
+		<string>AveriaSansLibre-Regular.ttf</string>
+		<string>Salsa-Regular.ttf</string>
+		<string>ShantellSans-Bold.ttf</string>
+		<string>ShantellSans-BoldItalic.ttf</string>
+		<string>ShantellSans-ExtraBold.ttf</string>
+		<string>ShantellSans-ExtraBoldItalic.ttf</string>
+		<string>ShantellSans-Italic.ttf</string>
+		<string>ShantellSans-Light.ttf</string>
+		<string>ShantellSans-LightItalic.ttf</string>
+		<string>ShantellSans-Medium.ttf</string>
+		<string>ShantellSans-MediumItalic.ttf</string>
+		<string>ShantellSans-Regular.ttf</string>
+		<string>ShantellSans-SemiBold.ttf</string>
+		<string>ShantellSans-SemiBoldItalic.ttf</string>
+	</array>
 </dict>
 </plist>

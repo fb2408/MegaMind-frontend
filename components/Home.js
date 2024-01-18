@@ -12,10 +12,12 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getHomePageData} from '../stores/homeStore';
 import Footer from './Footer';
 import SelectCategories from './SelectCategories';
+import DatePicker from 'react-native-date-picker';
 import { useIsFocused } from '@react-navigation/native'
 
-export default function Home({navigation}) {
+export default function Home({navigation, route}) {
   const [homeData, setHomeData] = useState({});
+  const {userId} = route.params
 
   const categoryIcons = {
     History: 'book-open',
@@ -29,27 +31,20 @@ export default function Home({navigation}) {
 
   useEffect(() => {
     if(isFocused){
-      getHomePageData(4).then(res => {
+      getHomePageData(userId).then(res => {
         setHomeData(res);
       });
     }
   }, [isFocused])
 
-/*  useEffect(() => {
-    getHomePageData(4).then(res => {
-      setHomeData(res);
-    });
-    console.log(navigation)
-  }, []);*/
-
   return (
     <View className="flex-1">
       <ScrollView>
         <View className="flex-1 justify-start items-start m-5">
-          <Text className="text-lg text-blue-800">
+          <Text className="text-base text-blue-800 mb-4" style={{fontFamily: "ShantellSans-Regular"}}>
             Welcome back, {homeData.username && homeData.username}
           </Text>
-          <Text className="font-black text-3xl text-blue-950">Let's play!</Text>
+          <Text className="text-4xl text-blue-950" style={{fontFamily: "ShantellSans-Bold"}}>Let's play!</Text>
           <View className="bg-blue-950 rounded-2xl p-5 w-full mt-7">
             <View className="flex flex-row justify-between items-center">
               <View className="flex flex-col justify-center items-center">
@@ -90,7 +85,8 @@ export default function Home({navigation}) {
                           userId: 4,
                           leagueId: 1,
                         })
-                      }>
+                      }
+                    >
                       Play now!
                     </Text>
                   </Pressable>
@@ -108,7 +104,7 @@ export default function Home({navigation}) {
           <Text className="mt-6 text-blue-950 font-bold text-lg mb-2">
             Favourite categories
           </Text>
-          <View className="flex flex-row justify-between w-full items-center flex-wrap">
+          <View className="flex flex-row justify-evenly w-full items-center flex-wrap">
             {homeData.favouriteCategories &&
               homeData.favouriteCategories.map(cat => (
                 <TouchableOpacity

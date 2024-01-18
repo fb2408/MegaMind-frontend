@@ -8,6 +8,7 @@ import League from './components/League';
 import Profile from './components/Profile';
 import SelectCategories from './components/SelectCategories';
 import QuizGame from './components/QuizGame';
+import Login from './components/Login';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -16,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Login"
         screenOptions={{animationEnabled: false}}>
         <Stack.Screen
           name="Home"
@@ -46,6 +47,11 @@ export default function App() {
         <Stack.Screen
           name="QuizGame"
           component={QuizGame}
+          options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
           options={{headerShown: false, animation: 'none'}}
         />
       </Stack.Navigator>

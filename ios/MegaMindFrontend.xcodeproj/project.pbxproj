@@ -14,6 +14,25 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-MegaMindFrontend-MegaMindFrontendTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-MegaMindFrontend-MegaMindFrontendTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E17E14BA17C246288FC7BE13 /* AveriaSansLibre-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 911F2068674B4F1BA401BD0F /* AveriaSansLibre-Bold.ttf */; };
+		858782F7549941199F4D152E /* AveriaSansLibre-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9ED64BDD41E04CA293C46B8B /* AveriaSansLibre-BoldItalic.ttf */; };
+		CF416ADAC5F54751A46720F9 /* AveriaSansLibre-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C55D952FDFFE4845BD629C95 /* AveriaSansLibre-Italic.ttf */; };
+		A3D24DECED24481CA12FCA54 /* AveriaSansLibre-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E860958A50EE4430B15BFC13 /* AveriaSansLibre-Light.ttf */; };
+		3EFE4D816ACC4B5F86A76EE0 /* AveriaSansLibre-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9079A0E281E6414B9BB6F13E /* AveriaSansLibre-LightItalic.ttf */; };
+		ACED633DACB64847A46D620B /* AveriaSansLibre-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2070FB55AF0B4AF594DF320F /* AveriaSansLibre-Regular.ttf */; };
+		FB891DFA3EEB43B09A9992E8 /* Salsa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB05AA355975418FA9ED8ADC /* Salsa-Regular.ttf */; };
+		16E638751FB04917B817B055 /* ShantellSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F25C8A8D5154AEC888EEE0C /* ShantellSans-Bold.ttf */; };
+		9F24E6FFC9184163AEC775F3 /* ShantellSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B4684B1D9DB43758CC6A1BF /* ShantellSans-BoldItalic.ttf */; };
+		75821083368446AEB0014006 /* ShantellSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D9A0501962F4311BB03ABB2 /* ShantellSans-ExtraBold.ttf */; };
+		05D9355D62CC4CB5B5A9A88D /* ShantellSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3892EA61EA43339BA61744 /* ShantellSans-ExtraBoldItalic.ttf */; };
+		6B427E45D85341D3BEC0FE6D /* ShantellSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A88BC0572CE494C9227C353 /* ShantellSans-Italic.ttf */; };
+		6F169320241E4BC4A3776B1A /* ShantellSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4716EE48B1BF4D988E171863 /* ShantellSans-Light.ttf */; };
+		EC7D99E968AB4950A5A29ABF /* ShantellSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D1E74C5FD0E47A5AE7CED3F /* ShantellSans-LightItalic.ttf */; };
+		813C5EE2520F43BB9F39ED03 /* ShantellSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8203F6FA9296430F9AAB26F6 /* ShantellSans-Medium.ttf */; };
+		A584520115404715A8E54355 /* ShantellSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA134808739E4AA6B970DAD6 /* ShantellSans-MediumItalic.ttf */; };
+		495BB3EC027C47639FD455F9 /* ShantellSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9BFF627D8FF42CEB33F2199 /* ShantellSans-Regular.ttf */; };
+		F4C28D3F546C4A75AF4F6989 /* ShantellSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EC5722EFACD46E3A86ADA0D /* ShantellSans-SemiBold.ttf */; };
+		37A013B40C794CAC9968C883 /* ShantellSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C353F6F903524DCABA863D66 /* ShantellSans-SemiBoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +63,25 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MegaMindFrontend/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-MegaMindFrontend-MegaMindFrontendTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaMindFrontend-MegaMindFrontendTests.release.xcconfig"; path = "Target Support Files/Pods-MegaMindFrontend-MegaMindFrontendTests/Pods-MegaMindFrontend-MegaMindFrontendTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		911F2068674B4F1BA401BD0F /* AveriaSansLibre-Bold.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibre-Bold.ttf"; path = "../public/fonts/AveriaSansLibre-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9ED64BDD41E04CA293C46B8B /* AveriaSansLibre-BoldItalic.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibre-BoldItalic.ttf"; path = "../public/fonts/AveriaSansLibre-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C55D952FDFFE4845BD629C95 /* AveriaSansLibre-Italic.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibre-Italic.ttf"; path = "../public/fonts/AveriaSansLibre-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E860958A50EE4430B15BFC13 /* AveriaSansLibre-Light.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibre-Light.ttf"; path = "../public/fonts/AveriaSansLibre-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9079A0E281E6414B9BB6F13E /* AveriaSansLibre-LightItalic.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibre-LightItalic.ttf"; path = "../public/fonts/AveriaSansLibre-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2070FB55AF0B4AF594DF320F /* AveriaSansLibre-Regular.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibre-Regular.ttf"; path = "../public/fonts/AveriaSansLibre-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EB05AA355975418FA9ED8ADC /* Salsa-Regular.ttf */ = {isa = PBXFileReference; name = "Salsa-Regular.ttf"; path = "../public/fonts/Salsa-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6F25C8A8D5154AEC888EEE0C /* ShantellSans-Bold.ttf */ = {isa = PBXFileReference; name = "ShantellSans-Bold.ttf"; path = "../public/fonts/ShantellSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4B4684B1D9DB43758CC6A1BF /* ShantellSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "ShantellSans-BoldItalic.ttf"; path = "../public/fonts/ShantellSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1D9A0501962F4311BB03ABB2 /* ShantellSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "ShantellSans-ExtraBold.ttf"; path = "../public/fonts/ShantellSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3D3892EA61EA43339BA61744 /* ShantellSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "ShantellSans-ExtraBoldItalic.ttf"; path = "../public/fonts/ShantellSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5A88BC0572CE494C9227C353 /* ShantellSans-Italic.ttf */ = {isa = PBXFileReference; name = "ShantellSans-Italic.ttf"; path = "../public/fonts/ShantellSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4716EE48B1BF4D988E171863 /* ShantellSans-Light.ttf */ = {isa = PBXFileReference; name = "ShantellSans-Light.ttf"; path = "../public/fonts/ShantellSans-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4D1E74C5FD0E47A5AE7CED3F /* ShantellSans-LightItalic.ttf */ = {isa = PBXFileReference; name = "ShantellSans-LightItalic.ttf"; path = "../public/fonts/ShantellSans-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8203F6FA9296430F9AAB26F6 /* ShantellSans-Medium.ttf */ = {isa = PBXFileReference; name = "ShantellSans-Medium.ttf"; path = "../public/fonts/ShantellSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CA134808739E4AA6B970DAD6 /* ShantellSans-MediumItalic.ttf */ = {isa = PBXFileReference; name = "ShantellSans-MediumItalic.ttf"; path = "../public/fonts/ShantellSans-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A9BFF627D8FF42CEB33F2199 /* ShantellSans-Regular.ttf */ = {isa = PBXFileReference; name = "ShantellSans-Regular.ttf"; path = "../public/fonts/ShantellSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2EC5722EFACD46E3A86ADA0D /* ShantellSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "ShantellSans-SemiBold.ttf"; path = "../public/fonts/ShantellSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C353F6F903524DCABA863D66 /* ShantellSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "ShantellSans-SemiBoldItalic.ttf"; path = "../public/fonts/ShantellSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +160,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				45777895D6374D719C227983 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +186,33 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		45777895D6374D719C227983 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				911F2068674B4F1BA401BD0F /* AveriaSansLibre-Bold.ttf */,
+				9ED64BDD41E04CA293C46B8B /* AveriaSansLibre-BoldItalic.ttf */,
+				C55D952FDFFE4845BD629C95 /* AveriaSansLibre-Italic.ttf */,
+				E860958A50EE4430B15BFC13 /* AveriaSansLibre-Light.ttf */,
+				9079A0E281E6414B9BB6F13E /* AveriaSansLibre-LightItalic.ttf */,
+				2070FB55AF0B4AF594DF320F /* AveriaSansLibre-Regular.ttf */,
+				EB05AA355975418FA9ED8ADC /* Salsa-Regular.ttf */,
+				6F25C8A8D5154AEC888EEE0C /* ShantellSans-Bold.ttf */,
+				4B4684B1D9DB43758CC6A1BF /* ShantellSans-BoldItalic.ttf */,
+				1D9A0501962F4311BB03ABB2 /* ShantellSans-ExtraBold.ttf */,
+				3D3892EA61EA43339BA61744 /* ShantellSans-ExtraBoldItalic.ttf */,
+				5A88BC0572CE494C9227C353 /* ShantellSans-Italic.ttf */,
+				4716EE48B1BF4D988E171863 /* ShantellSans-Light.ttf */,
+				4D1E74C5FD0E47A5AE7CED3F /* ShantellSans-LightItalic.ttf */,
+				8203F6FA9296430F9AAB26F6 /* ShantellSans-Medium.ttf */,
+				CA134808739E4AA6B970DAD6 /* ShantellSans-MediumItalic.ttf */,
+				A9BFF627D8FF42CEB33F2199 /* ShantellSans-Regular.ttf */,
+				2EC5722EFACD46E3A86ADA0D /* ShantellSans-SemiBold.ttf */,
+				C353F6F903524DCABA863D66 /* ShantellSans-SemiBoldItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +310,25 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E17E14BA17C246288FC7BE13 /* AveriaSansLibre-Bold.ttf in Resources */,
+				858782F7549941199F4D152E /* AveriaSansLibre-BoldItalic.ttf in Resources */,
+				CF416ADAC5F54751A46720F9 /* AveriaSansLibre-Italic.ttf in Resources */,
+				A3D24DECED24481CA12FCA54 /* AveriaSansLibre-Light.ttf in Resources */,
+				3EFE4D816ACC4B5F86A76EE0 /* AveriaSansLibre-LightItalic.ttf in Resources */,
+				ACED633DACB64847A46D620B /* AveriaSansLibre-Regular.ttf in Resources */,
+				FB891DFA3EEB43B09A9992E8 /* Salsa-Regular.ttf in Resources */,
+				16E638751FB04917B817B055 /* ShantellSans-Bold.ttf in Resources */,
+				9F24E6FFC9184163AEC775F3 /* ShantellSans-BoldItalic.ttf in Resources */,
+				75821083368446AEB0014006 /* ShantellSans-ExtraBold.ttf in Resources */,
+				05D9355D62CC4CB5B5A9A88D /* ShantellSans-ExtraBoldItalic.ttf in Resources */,
+				6B427E45D85341D3BEC0FE6D /* ShantellSans-Italic.ttf in Resources */,
+				6F169320241E4BC4A3776B1A /* ShantellSans-Light.ttf in Resources */,
+				EC7D99E968AB4950A5A29ABF /* ShantellSans-LightItalic.ttf in Resources */,
+				813C5EE2520F43BB9F39ED03 /* ShantellSans-Medium.ttf in Resources */,
+				A584520115404715A8E54355 /* ShantellSans-MediumItalic.ttf in Resources */,
+				495BB3EC027C47639FD455F9 /* ShantellSans-Regular.ttf in Resources */,
+				F4C28D3F546C4A75AF4F6989 /* ShantellSans-SemiBold.ttf in Resources */,
+				37A013B40C794CAC9968C883 /* ShantellSans-SemiBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

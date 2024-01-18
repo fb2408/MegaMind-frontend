@@ -1,0 +1,81 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "public/fonts/AveriaSansLibre-Bold.ttf",
+      "sha1": "e1bf1337cb7a6c77c3ceaf5126b44953f8393326"
+    },
+    {
+      "path": "public/fonts/AveriaSansLibre-BoldItalic.ttf",
+      "sha1": "6c852db23cbe30c24ab6c0667ab72e2169b5bc34"
+    },
+    {
+      "path": "public/fonts/AveriaSansLibre-Italic.ttf",
+      "sha1": "c966d200212159d00618ce95d4dc059daedf89a2"
+    },
+    {
+      "path": "public/fonts/AveriaSansLibre-Light.ttf",
+      "sha1": "0a0885832c96a31f14c5e9ece4dea6cab9806cd2"
+    },
+    {
+      "path": "public/fonts/AveriaSansLibre-LightItalic.ttf",
+      "sha1": "a8d3679bd2283b5badc7755855b38946aa25db54"
+    },
+    {
+      "path": "public/fonts/AveriaSansLibre-Regular.ttf",
+      "sha1": "dad099a9c0e47237e3f30b97ec4c80b062bfd0c4"
+    },
+    {
+      "path": "public/fonts/Salsa-Regular.ttf",
+      "sha1": "28083ea63e90567b1702b93112e443daa62bc76d"
+    },
+    {
+      "path": "public/fonts/ShantellSans-Bold.ttf",
+      "sha1": "05654863be3315cdf7b2e24c949afdef67de1aa6"
+    },
+    {
+      "path": "public/fonts/ShantellSans-BoldItalic.ttf",
+      "sha1": "579c8f9143040ad0dc4df2064ba279dbb69a3654"
+    },
+    {
+      "path": "public/fonts/ShantellSans-ExtraBold.ttf",
+      "sha1": "fb4b5a42938de99f8779c6648a6d26a77d57d5f5"
+    },
+    {
+      "path": "public/fonts/ShantellSans-ExtraBoldItalic.ttf",
+      "sha1": "d86b4162693aad05ec2ada9b62189304df85d31f"
+    },
+    {
+      "path": "public/fonts/ShantellSans-Italic.ttf",
+      "sha1": "baad7e4c42977da2064636e8f59a8b5330306e09"
+    },
+    {
+      "path": "public/fonts/ShantellSans-Light.ttf",
+      "sha1": "2c6a988873290c662f5be2c0075719b45f298d0f"
+    },
+    {
+      "path": "public/fonts/ShantellSans-LightItalic.ttf",
+      "sha1": "c5674fd383018efd2856c4df6a706d9fff237fe8"
+    },
+    {
+      "path": "public/fonts/ShantellSans-Medium.ttf",
+      "sha1": "9aa7c2c9443701b7904b913082f042a86f5c2525"
+    },
+    {
+      "path": "public/fonts/ShantellSans-MediumItalic.ttf",
+      "sha1": "3485326fa5fb25a8b2f97524c9e10c4eecbe0648"
+    },
+    {
+      "path": "public/fonts/ShantellSans-Regular.ttf",
+      "sha1": "185ebf86e6b58688b51a82ae2517fb4e743a7096"
+    },
+    {
+      "path": "public/fonts/ShantellSans-SemiBold.ttf",
+      "sha1": "deee59e312bc1c49b5cb930971b37d9a024b984d"
+    },
+    {
+      "path": "public/fonts/ShantellSans-SemiBoldItalic.ttf",
+      "sha1": "e79800efcd5869e571453dc9d1883652167cff30"
+    }
+  ]
+}
