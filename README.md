@@ -1,1 +1,1 @@
-Zukayovo napisi nesto
+Tresla se brda rodija se miš!
