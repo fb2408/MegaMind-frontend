@@ -128,12 +128,12 @@ export default function Profile({navigation, route}) {
 
           </View>
 
-          <Text className='text-blue-950 font-semibold text-base mt-10'>Accuracy by category</Text>
+          <Text className='text-blue-950 font-semibold text-base m-5'>Accuracy by category</Text>
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {data.categories && data.categories.map((category, index) => {
-                if(index !== 4) {
-                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-20  mr-2"
+                  return(
+                  <View className="border-2 border-gray-300 rounded-full items-center justify-center w-20  mr-2"
                         key={index}>
                     <IconFont5
                       name={categoryIcons[category.categoryName]}
@@ -142,19 +142,7 @@ export default function Profile({navigation, route}) {
                     />
                     <Text className="text-blue-800 text-xs">{category.categoryName.substr(0, 7)}</Text>
                     <Text className="text-blue-800 text-xs">{category.answerPercentage ? Math.round(category.answerPercentage * 100) : 0}%</Text>
-                  </View> )
-                } else {
-                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-20 "
-                        key={index}>
-                    <IconFont5
-                      name={categoryIcons[category.categoryName]}
-                      size={24}
-                      color="rgb(23 37 84)"
-                    />
-                    <Text className="text-blue-800">{category.categoryName}</Text>
-                    <Text className="text-blue-800">{Math.round(category.answerPercentage * 100)}%</Text>
                   </View>)
-                }
             })}
           </ScrollView>
 

@@ -15,7 +15,8 @@ export default function League({route, navigation}) {
   const [leagueData, setLeagueData] = useState({});
   const [firstThree, setFirstThree] = useState(null);
   const isFocused = useIsFocused()
-  const [userOnLeaderBoard, setUserOnLeaderBoard] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [userOnLeaderBoard, setUserOnLeaderBoard] = useState(true);
 
   useEffect(() => {
     if(isFocused){
@@ -23,8 +24,17 @@ export default function League({route, navigation}) {
         res.users.sort((a, b) => b.score - a.score);
         setLeagueData(res);
         setFirstThreeOrder(res.users);
+
         let leaderboardUsers = res.users.slice(0, 7);
-        leaderboardUsers.forEach(user => user.username === username && setUserOnLeaderBoard(true));
+        let onLeaderboard = false;
+        leaderboardUsers.forEach(user => {if(user.username == username) onLeaderboard = true});
+        setUserOnLeaderBoard(onLeaderboard);
+
+        let curr;
+        res.users.forEach(user => {
+          if (user.username == username) curr = user;
+        });
+        setCurrentUser(curr);
       });
     }
   }, [isFocused]);
@@ -59,7 +69,6 @@ export default function League({route, navigation}) {
                     <Text
                       className='text-lg font-bold text-blue-950 mt-4'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
                     <Text className='text-blue-800'>{person.score} points</Text>
-                    <Text className='text-blue-800'>{username} points</Text>
                   </View>
                 );
               }
@@ -119,17 +128,58 @@ export default function League({route, navigation}) {
               );
             }
           })}
-          <Text className="font-bold text-xl text-blue-900 mb-4">Play this league's questions!</Text>
-          <TouchableOpacity className="bg-blue-400 py-2 px-3 rounded-md">
-            <Text className="text-lg text-white"
-                onPress={() =>
-                    navigation.navigate('QuizGame', {
-                      userId: userId,
-                      leagueId: leagueId,
-                      username: username
-                    })
-            }>Play!</Text>
-          </TouchableOpacity>
+          {!userOnLeaderBoard && (
+              <View className='flex flex-row items-center w-full border-2 border-gray-300 rounded-xl mb-5 p-2 border-green-300'>
+                <Text className='font-semibold text-blue-950 mr-4'>#{currentUser.position}</Text>
+                <View className='flex flex-row items-center flex-1 justify-between'>
+                  <View className='flex flex-row items-center'>
+                    <Image source={require('../public/icons/head_3.png')}
+                           className='w-10 h-10 rounded-full mr-2' />
+                    <Text
+                        className='font-semibold text-blue-950 text-base'>{currentUser.lastname && (currentUser.firstname + ' ' + currentUser.lastname.substr(0, 1) + '.')}</Text>
+                  </View>
+                  <View className='flex flex-row items-center'>
+                    {currentUser.up === -1 ? (
+                        <Icon
+                            name='arrowdown'
+                            size={20}
+                            color='red'
+                        />
+                    ) : currentUser.up === 0 ? (
+                        <IconF
+                            name='grip-lines'
+                            size={20}
+                            color='gray'
+                        />
+                    ) : (
+                        <Icon
+                            name='arrowup'
+                            size={20}
+                            color='green'
+                        />
+                    )}
+                    <Text className='text-blue-800 mx-2'>{currentUser.score} points</Text>
+                  </View>
+                </View>
+              </View>
+          )}
+          {!leagueData.quizDone ? (
+              <View className='flex-col items-center justify-center'>
+                <Text className="font-bold text-xl text-blue-900 mb-4">Play this league's questions!</Text>
+                  <TouchableOpacity className="bg-blue-400 py-2 px-3 rounded-md">
+                      <Text className="text-lg text-white"
+                          onPress={() =>
+                          navigation.navigate('QuizGame', {
+                          userId: userId,
+                          leagueId: leagueId,
+                          username: username})}
+                      >Play!</Text>
+                  </TouchableOpacity>
+              </View>
+          ) : (
+              <Text className="font-bold text-xl text-blue-900 mb-4">You already played daily quiz.</Text>
+          )}
+
           {leagueId !== 1 && (
               <View className='p-10 items-center justify-center'>
                 <Text className="font-bold text-xl text-blue-900 mb-4">Invite friends with code!</Text>
