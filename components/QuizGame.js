@@ -1,6 +1,7 @@
 import {Animated, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function QuizGame({navigation, route, props}) {
   const {userId, leagueId} = route.params;
@@ -18,6 +19,17 @@ export default function QuizGame({navigation, route, props}) {
   const [currentCategoryId, setCurrentCategoryId] = useState(0);
   const [currentQuestionInCategory, setCurrentQuestionInCategory] = useState(0);
   let [questionShuffle, setQuestionShuffle] = useState([]);
+  let [isCorrect, setIsCorrect] = useState(false);
+
+  const [currentCategoryIcon, setCurrentCategoryIcon] = useState('History');
+  const categoryIcons = [
+    {categoryName: 'History', iconName: 'book-open'},
+    {categoryName: 'Music', iconName: 'music'},
+    {categoryName: 'Sport', iconName: 'trophy'},
+    {categoryName: 'Art', iconName: 'palette'},
+    {categoryName: 'Geography', iconName: 'globe-americas'},
+    {categoryName: 'Movies', iconName: 'film'},
+  ];
 
   var url =
     'https://mega-mind-backend-2fe25339801f.herokuapp.com/questions/' +
@@ -40,6 +52,15 @@ export default function QuizGame({navigation, route, props}) {
         ]);
         console.log(json.questions);
         setQuestionShuffle(array);
+        let currCategoryName = '';
+        categoryIcons.forEach(icon => {
+          if (
+            String(icon.categoryName) === String(json.questions[0].categoryName)
+          ) {
+            currCategoryName = icon.iconName;
+          }
+        });
+        setCurrentCategoryIcon(currCategoryName);
         return json;
       })
       .catch(error => {
@@ -88,18 +109,20 @@ export default function QuizGame({navigation, route, props}) {
       console.log('correct');
       let newElement = {
         questionId: previousQuestionId,
-        boolean: true,
+        correct: true,
       };
       console.log(newElement);
+      setIsCorrect(true);
       setAnswers(prevArr => [...prevArr, newElement]);
       setMessagge('CORRECT ANSWER, WELL DONE!');
     } else {
       console.log('wrong');
       let newElement = {
         questionId: previousQuestionId,
-        boolean: false,
+        correct: false,
       };
       console.log(newElement);
+      setIsCorrect(false);
       setAnswers(prevArr => [...prevArr, newElement]);
       setMessagge(
         'WRONG ANSWER :( Correct answer is: ' + currentQuestion.correctAnswer,
@@ -139,6 +162,13 @@ export default function QuizGame({navigation, route, props}) {
           (parseInt(previousCategoryId) + 1) *
             parseInt(numOfQuestionsInCategory),
         );
+        let currCategoryName = '';
+        categoryIcons.forEach(icon => {
+          if (String(icon.categoryName) === String(newQuestion.categoryName)) {
+            currCategoryName = icon.iconName;
+          }
+        });
+        setCurrentCategoryIcon(currCategoryName);
       }
       console.log('after changing question ');
       console.log(newQuestion);
@@ -195,105 +225,140 @@ export default function QuizGame({navigation, route, props}) {
   };
 
   return (
-    <View className=" h-screen bg-blue-900">
-      <View className="flex-col items-center ">
-        <Text className="mt-10  text-2xl text-white font-bold">
-          {currentQuestion.categoryName}
-        </Text>
-        <View className="mt-5">
-          <Icon name="palette" size={150} color="#172554" />
-        </View>
-
-        <View
-          style={{
-            backgroundColor: '#172554',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 9,
-            },
-            shadowOpacity: 0.48,
-            shadowRadius: 11.95,
-
-            elevation: 18,
-          }}
-          className=" mt-7 rounded-xl items-center width-screen  ml-5 mr-5  animate-pulse">
-          <Text className=" text-l text-white text-center font-bold p-5">
-            {currentQuestion.questionText}
+    <View className=" h-screen ">
+      <LinearGradient
+        colors={['rgb(30 64 175)', 'rgb(23 37 84)']}
+        useAngle={true}
+        angle={45}
+        angleCenter={{x: 0.2, y: 0.5}}
+        className="flex items-center flex-1 justify-start height-screen w-full">
+        <View className="flex-col items-center ">
+          <Text className="mt-10  text-2xl text-white font-bold">
+            {currentQuestion.categoryName}
           </Text>
-        </View>
+          <View className="mt-5">
+            <Icon
+              className="bg-blue-900"
+              name={currentCategoryIcon}
+              size={150}
+              // color="#172554"
+            />
+          </View>
 
-        {showExplanationAndMessage && (
-          <Animated.View
-            style={[
-              {
-                opacity: fadeAnim,
-              },
-            ]}
-            className="mt-5 bg-blue-400 flex-col rounded-xl items-center width-screen  ml-5 mr-5 h-32 animate-pulse">
-            <View
-              style={[styles.shadow, {width: '100%'}]}
-              className=" mt-2 bg-white items-center rounded-xl h-10 ml-3 mr-3">
-              <Text className="font-bold text-center p-2">{messagge}</Text>
-            </View>
-            <View className=" mt-1 p-3">
-              <Text className="text-white text-center">
-                {currentQuestion.explanation}
-              </Text>
-            </View>
-          </Animated.View>
-        )}
-        <View className="flex flex-row justify-evenly w-full flex-wrap mt-5">
-          <TouchableOpacity
-            style={styles.shadow}
-            disabled={showExplanationAndMessage}
-            className="flex flex-col justify-evenly items-center rounded-xl w-40 h-28  bg-white"
-            onPress={e => {
-              onPress(0);
-            }}>
-            <Text>{questionShuffle.at(0)}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.shadow}
-            disabled={showExplanationAndMessage}
-            className="flex flex-col font-bold justify-evenly items-center  rounded-xl w-40 h-28  bg-white "
-            onPress={() => {
-              onPress(1);
-            }}>
-            <Text>{questionShuffle[1]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.shadow}
-            disabled={showExplanationAndMessage}
-            className="flex flex-col justify-evenly font-bold items-center  rounded-xl w-40 h-28 mt-7 bg-white"
-            onPress={() => {
-              onPress(2);
-            }}>
-            <Text>{questionShuffle[2]}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.shadow}
-            disabled={showExplanationAndMessage}
-            className="flex flex-col justify-evenly font-bold items-center rounded-xl w-40 h-28 mt-7  bg-white"
-            onPress={() => {
-              onPress(3);
-            }}>
-            <Text>{questionShuffle[3]}</Text>
-          </TouchableOpacity>
-        </View>
-        {nextButtonVisible && (
-          <TouchableOpacity
+          <View
             style={{
               backgroundColor: '#172554',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 9,
+              },
+              shadowOpacity: 0.48,
+              shadowRadius: 11.95,
+
+              elevation: 18,
             }}
-            className=" mt-10  left rounded-s  w-24 h-7"
-            onPress={() => updateQuestion()}>
-            <Text className="text-white text-center p-1 object-right">
-              {'Next ->'}
+            className=" mt-7 rounded-xl items-center width-screen  ml-5 mr-5  animate-pulse">
+            <Text className=" text-l text-white text-center font-bold p-5">
+              {currentQuestion.questionText}
             </Text>
-          </TouchableOpacity>
-        )}
-      </View>
+          </View>
+
+          {showExplanationAndMessage && (
+            <Animated.View
+              style={[
+                {
+                  opacity: fadeAnim,
+                },
+              ]}
+              className="mt-10 bg-blue-400 flex-col rounded-xl items-center width-screen  ml-5 mr-5 h-40 animate-pulse">
+              <View
+                style={[
+                  // styles.shadow,
+                  {
+                    borderWidth: 3,
+                    // borderColor: 'rgba(255, 0, 0, 1)',
+                    borderColor: !isCorrect
+                      ? 'rgba(255, 0, 0, 0.5)'
+                      : 'rgba(60, 179, 113, 1)',
+                    width: '100%',
+                    // color: !isCorrect
+                    //   ? 'rgba(255, 0, 0, 0.5)'
+                    //   : 'rgba(60, 179, 113, 0.5)',
+                  },
+                ]}
+                className=" mt-5  bg-white items-center rounded-xl  ml-3 mr-3">
+                <Text
+                  style={{
+                    color: !isCorrect
+                      ? 'rgba(255, 0, 0, 0.5)'
+                      : 'rgba(60, 179, 113, 1)',
+                  }}
+                  className="font-bold text-center p-2">
+                  {messagge}
+                </Text>
+              </View>
+              <View className=" mt-1 p-3">
+                <Text className="text-white text-center">
+                  {currentQuestion.explanation}
+                </Text>
+              </View>
+            </Animated.View>
+          )}
+          {!showExplanationAndMessage && (
+            <View className="flex flex-row justify-evenly w-full flex-wrap mt-10">
+              <TouchableOpacity
+                style={styles.shadow}
+                disabled={showExplanationAndMessage}
+                className="flex flex-col justify-evenly items-center rounded-xl w-40 h-28  bg-white"
+                onPress={e => {
+                  onPress(0);
+                }}>
+                <Text>{questionShuffle.at(0)}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.shadow}
+                disabled={showExplanationAndMessage}
+                className="flex flex-col font-bold justify-evenly items-center  rounded-xl w-40 h-28  bg-white "
+                onPress={() => {
+                  onPress(1);
+                }}>
+                <Text>{questionShuffle[1]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.shadow}
+                disabled={showExplanationAndMessage}
+                className="flex flex-col justify-evenly font-bold items-center  rounded-xl w-40 h-28 mt-7 bg-white"
+                onPress={() => {
+                  onPress(2);
+                }}>
+                <Text>{questionShuffle[2]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.shadow}
+                disabled={showExplanationAndMessage}
+                className="flex flex-col justify-evenly font-bold items-center rounded-xl w-40 h-28 mt-7  bg-white"
+                onPress={() => {
+                  onPress(3);
+                }}>
+                <Text>{questionShuffle[3]}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {nextButtonVisible && (
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#172554',
+              }}
+              className=" mt-10  left rounded-s  w-24 h-7"
+              onPress={() => updateQuestion()}>
+              <Text className="text-white text-center p-1 object-right">
+                {'Next ->'}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </LinearGradient>
     </View>
   );
 }
