@@ -12,6 +12,7 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getHomePageData} from '../stores/homeStore';
 import Footer from './Footer';
 import SelectCategories from './SelectCategories';
+import { useIsFocused } from '@react-navigation/native'
 
 export default function Home({navigation}) {
   const [homeData, setHomeData] = useState({});
@@ -24,12 +25,22 @@ export default function Home({navigation}) {
     Geography: 'globe-americas',
     Movies: 'film',
   };
+  const isFocused = useIsFocused()
 
   useEffect(() => {
+    if(isFocused){
+      getHomePageData(4).then(res => {
+        setHomeData(res);
+      });
+    }
+  }, [isFocused])
+
+/*  useEffect(() => {
     getHomePageData(4).then(res => {
       setHomeData(res);
     });
-  }, []);
+    console.log(navigation)
+  }, []);*/
 
   return (
     <View className="flex-1">
@@ -102,7 +113,7 @@ export default function Home({navigation}) {
               homeData.favouriteCategories.map(cat => (
                 <TouchableOpacity
                   className="flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32"
-                  key={cat.categoryName}>
+                  key={cat.categoryId}>
                   <Icon
                     name={categoryIcons[cat.categoryName]}
                     size={50}
@@ -118,7 +129,7 @@ export default function Home({navigation}) {
               onPress={() =>
                 navigation.navigate('SelectCategories', {
                   selected: homeData.favouriteCategories.map(
-                    cat => cat.categoryName,
+                    cat => cat.categoryId,
                   ),
                 })
               }>

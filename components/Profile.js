@@ -48,11 +48,7 @@ export default function Profile({navigation}) {
           <Text className='text-blue-800 mb-5'>@{data.userName}</Text>
           <View className='flex flex-row w-full justify-between flex-wrap'>
 
-            <Pressable className="border-2 border-gray-200 rounded-xl flex items-center px-3 py-5" style={styles.container}
-            onPress={() => {
-              setData(1)
-            }}
-            >
+            <View className="border-2 border-gray-200 rounded-xl flex items-center px-3 py-5" style={styles.container}>
               <IconFont6
                 name="ranking-star"
                 size={36}
@@ -60,7 +56,7 @@ export default function Profile({navigation}) {
               />
               <Text className="text-blue-950 font-bold text-xl mt-2 mb-1">#{data.globalLeagueRank}</Text>
               <Text className="text-blue-800">World rank</Text>
-            </Pressable>
+            </View>
 
             <View className="border-2 border-gray-200 rounded-xl flex items-center px-3 py-5" style={styles.container}>
               <IconAnt
@@ -119,7 +115,7 @@ export default function Profile({navigation}) {
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {data.categories && data.categories.map((category, index) => {
                 if(index !== 4) {
-                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-1/5 px-4 mr-2"
+                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-20  mr-2"
                         key={index}>
                     <IconFont5
                       name={categoryIcons[category.categoryName]}
@@ -130,7 +126,7 @@ export default function Profile({navigation}) {
                     <Text className="text-blue-800 text-xs">{Math.round(category.answerPercentage * 100)}%</Text>
                   </View> )
                 } else {
-                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-1/5 px-6"
+                  return(<View className="border-2 border-gray-300 rounded-full items-center justify-center w-20 "
                         key={index}>
                     <IconFont5
                       name={categoryIcons[category.categoryName]}

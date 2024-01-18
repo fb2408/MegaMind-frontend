@@ -112,7 +112,13 @@ export default function League({route, navigation}) {
           })}
           <Text className="font-bold text-xl text-blue-900 mb-4">Play this league's questions!</Text>
           <TouchableOpacity className="bg-blue-400 py-2 px-3 rounded-md">
-            <Text className="text-lg text-white">Play!</Text>
+            <Text className="text-lg text-white"
+                onPress={() =>
+                    navigation.navigate('QuizGame', {
+                      userId: userId,
+                      leagueId: leagueId,
+                    })
+            }>Play!</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
