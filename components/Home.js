@@ -57,7 +57,7 @@ export default function Home({navigation, route}) {
                 </Text>
                 <View className="flex justify-start items-center flex-row">
                   <Icon name="gem" size={14} color="white" />
-                  <Text className="text-white ml-1">+10 daily points</Text>
+                  <Text className="text-white ml-1">+100 daily points</Text>
                 </View>
               </View>
               <View className="mr-4">

@@ -57,7 +57,7 @@ export default function League({route, navigation}) {
             {firstThree && firstThree.map((person, index) => {
               if (index === 1) {
                 return (
-                  <View className={'flex justify-center items-center py-2 px-4 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
+                  <View className={'flex justify-center items-center py-2 w-32 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
                         key={index}>
                     <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                     <Image
@@ -72,7 +72,7 @@ export default function League({route, navigation}) {
                 );
               }
               return (
-                <View className={'flex justify-center items-center py-2 px-3 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
+                <View className={'flex justify-center items-center py-2 w-28 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
                       key={index}>
                   <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
                   <Image
