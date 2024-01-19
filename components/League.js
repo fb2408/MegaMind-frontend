@@ -130,7 +130,7 @@ export default function League({route, navigation}) {
           })}
           {!userOnLeaderBoard && (
               <View className='flex flex-row items-center w-full border-2 border-gray-300 rounded-xl mb-5 p-2 border-green-300'>
-                <Text className='font-semibold text-blue-950 mr-4'>#{currentUser.position}</Text>
+                <Text className='font-semibold text-blue-950 mr-4'>#{currentUser && currentUser.position}</Text>
                 <View className='flex flex-row items-center flex-1 justify-between'>
                   <View className='flex flex-row items-center'>
                     <Image source={require('../public/icons/head_3.png')}
@@ -139,13 +139,13 @@ export default function League({route, navigation}) {
                         className='font-semibold text-blue-950 text-base'>{currentUser.lastname && (currentUser.firstname + ' ' + currentUser.lastname.substr(0, 1) + '.')}</Text>
                   </View>
                   <View className='flex flex-row items-center'>
-                    {currentUser.up === -1 ? (
+                    {(currentUser && currentUser.up === -1) ? (
                         <Icon
                             name='arrowdown'
                             size={20}
                             color='red'
                         />
-                    ) : currentUser.up === 0 ? (
+                    ) : (currentUser && currentUser.up === 0) ? (
                         <IconF
                             name='grip-lines'
                             size={20}
@@ -158,7 +158,7 @@ export default function League({route, navigation}) {
                             color='green'
                         />
                     )}
-                    <Text className='text-blue-800 mx-2'>{currentUser.score} points</Text>
+                    <Text className='text-blue-800 mx-2'>{currentUser && currentUser.score} points</Text>
                   </View>
                 </View>
               </View>
@@ -171,8 +171,10 @@ export default function League({route, navigation}) {
                           onPress={() =>
                           navigation.navigate('QuizGame', {
                           userId: userId,
-                          leagueId: leagueId,
-                          username: username})}
+                          Id: leagueId,
+                          userName: username,
+                          isLeagueQuiz: true }
+                          )}
                       >Play!</Text>
                   </TouchableOpacity>
               </View>

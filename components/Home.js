@@ -87,8 +87,8 @@ export default function Home({navigation, route}) {
                       onPress={() =>
                         navigation.navigate('QuizGame', {
                           userId: userId,
-                          leagueId: 1,
-                          username: username,
+                          Id: 1,
+                          userName: username,
                           isLeagueQuiz: true
                         })
                       }
@@ -118,9 +118,9 @@ export default function Home({navigation, route}) {
                   onPress={() =>
                       navigation.navigate('QuizGame', {
                         userId: userId,
-                        categoryId: cat.categoryId,
+                        Id: cat.categoryId,
                         isLeagueQuiz: false,
-                        username: username
+                        userName: username
                       })}
                   className="flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-3"
                   key={cat.categoryId}>
