@@ -52,12 +52,12 @@ export default function Home({navigation, route}) {
           <View className="bg-blue-950 rounded-2xl p-5 w-full mt-7">
             <View className="flex flex-row justify-between items-center">
               <View className="flex flex-col justify-center items-center">
-                <Text className="text-white font-bold text-lg mb-3">
+                <Text className="text-white text-lg mb-3" style={{fontFamily: "ShantellSans-Bold"}}>
                   {homeData.daysInARow} days strike!
                 </Text>
                 <View className="flex justify-start items-center flex-row">
                   <Icon name="gem" size={14} color="white" />
-                  <Text className="text-white ml-1">+100 daily points</Text>
+                  <Text className="text-white ml-1" style={{fontFamily: "ShantellSans-Bold"}}>+100 daily points</Text>
                 </View>
               </View>
               <View className="mr-4">
@@ -70,19 +70,20 @@ export default function Home({navigation, route}) {
               className="bg-white mt-2"
             />
           </View>
-          <Text className="mt-6 text-blue-950 font-bold text-lg">
+          <Text className="mt-6 text-blue-950 text-lg" style={{fontFamily: "ShantellSans-Bold"}}>
             Daily quiz
           </Text>
           <View className="border-2 border-gray-300 rounded-2xl p-5 w-full mt-2">
             <View className="flex flex-row justify-between items-center">
               <View className="flex flex-col items-center">
-                <Text className="text-blue-950 font-bold text-xl mb-1">
+                <Text className="text-blue-950 text-xl mb-1" style={{fontFamily: "ShantellSans-Bold"}}>
                   Compete globally
                 </Text>
-                <Text className="mb-4 text-blue-800">+ 10k users</Text>
+                <Text className="mb-4 text-blue-800" style={{fontFamily: "ShantellSans-Bold"}}>+ 10k users</Text>
                 {!homeData.globalDone ? (
                   <Pressable className="bg-blue-400 py-2 px-3 rounded-md">
                     <Text
+                      style={{fontFamily: "ShantellSans-Bold"}}
                       className="text-white"
                       onPress={() =>
                         navigation.navigate('QuizGame', {
@@ -98,7 +99,7 @@ export default function Home({navigation, route}) {
                   </Pressable>
                 ) : (
                   <View className="bg-gray-300 py-2 px-3 rounded-md">
-                    <Text className="text-white">Come back tommorow</Text>
+                    <Text className="text-white" style={{fontFamily: "ShantellSans-Bold"}}>Come back tommorow</Text>
                   </View>
                 )}
               </View>
@@ -107,7 +108,7 @@ export default function Home({navigation, route}) {
               </View>
             </View>
           </View>
-          <Text className="mt-6 text-blue-950 font-bold text-lg mb-2">
+          <Text className="mt-6 text-blue-950 text-lg mb-2" style={{fontFamily: "ShantellSans-Bold"}}>
             Favourite categories
           </Text>
           <View className="flex flex-row justify-evenly w-full items-center flex-wrap">
@@ -130,7 +131,7 @@ export default function Home({navigation, route}) {
                     size={50}
                     color="#172554"
                   />
-                  <Text className="text-blue-950 text-lg font-bold">
+                  <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-Bold"}}>
                     {cat.categoryName}
                   </Text>
                 </TouchableOpacity>
@@ -146,7 +147,7 @@ export default function Home({navigation, route}) {
                 })
               }>
               <Icon name="pen" size={50} color="#172554" />
-              <Text className="text-blue-950 text-lg font-bold ">Edit</Text>
+              <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-Bold"}}>Edit</Text>
             </TouchableOpacity>
           </View>
         </View>

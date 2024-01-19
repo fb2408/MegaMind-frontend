@@ -51,38 +51,38 @@ export default function League({route, navigation}) {
     <View className='flex-1'>
       <ScrollView>
         <View className='m-5 flex-1 flex items-center'>
-          <Text className='font-black text-3xl text-blue-950 mt-2 mb-6'>Leaderboard</Text>
-          <Text className='font-bold text-lg text-blue-900 mb-6'>Today</Text>
+          <Text className='text-3xl text-blue-950 mt-2 mb-6' style={{fontFamily: "ShantellSans-Bold"}}>Leaderboard</Text>
+          <Text className='text-lg text-blue-900 mb-6' style={{fontFamily: "ShantellSans-Bold"}}>Today</Text>
           <View className='flex flex-row justify-around items-end w-full mb-6'>
             {firstThree && firstThree.map((person, index) => {
               if (index === 1) {
                 return (
                   <View className={'flex justify-center items-center py-2 w-32 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
                         key={index}>
-                    <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
+                    <Text className='text-blue-950 text-2xl mb-2' style={{fontFamily: "ShantellSans-Bold"}}>#{person.position}</Text>
                     <Image
                       className='rounded-full w-24 h-24'
                       source={require('../public/icons/head_3.png')
                       }
                     />
                     <Text
-                      className='text-lg font-bold text-blue-950 mt-4'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
-                    <Text className='text-blue-800'>{person.score} points</Text>
+                      className='text-lg text-blue-950 mt-4' style={{fontFamily: "ShantellSans-Bold"}}>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
+                    <Text className='text-blue-800' style={{fontFamily: "ShantellSans-Regular"}}>{person.score} points</Text>
                   </View>
                 );
               }
               return (
                 <View className={'flex justify-center items-center py-2 w-28 border-2 border-gray-300 rounded-3xl ' + (person.username == username ? 'border-green-300' : '')}
                       key={index}>
-                  <Text className='font-black text-blue-950 text-2xl mb-2'>#{person.position}</Text>
+                  <Text className='text-blue-950 text-2xl mb-2' style={{fontFamily: "ShantellSans-Bold"}}>#{person.position}</Text>
                   <Image
                     className='rounded-full w-16 h-16'
                     source={require('../public/icons/head_3.png')
                     }
                   />
                   <Text
-                    className='text-lg font-bold text-blue-950 mt-4'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
-                  <Text className='text-blue-800'>{person.score} points</Text>
+                    className='text-base text-blue-950 mt-4' style={{fontFamily: "ShantellSans-Bold"}}>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
+                  <Text className='text-blue-800 ' style={{fontFamily: "ShantellSans-Regular"}}>{person.score} points</Text>
                 </View>
               );
             })}
@@ -92,13 +92,13 @@ export default function League({route, navigation}) {
               return (
                 <View className={'flex flex-row items-center w-full border-2 border-gray-300 rounded-xl mb-5 p-2 ' + (person.username == username ? 'border-green-300' : '')}
                       key={index}>
-                  <Text className='font-semibold text-blue-950 mr-4'>#{person.position}</Text>
+                  <Text className='text-blue-950 mr-4' style={{fontFamily: "ShantellSans-Regular"}}>#{person.position}</Text>
                   <View className='flex flex-row items-center flex-1 justify-between'>
                     <View className='flex flex-row items-center'>
                       <Image source={require('../public/icons/head_3.png')}
                              className='w-10 h-10 rounded-full mr-2' />
                       <Text
-                        className='font-semibold text-blue-950 text-base'>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
+                        className='text-blue-950 text-base' style={{fontFamily: "ShantellSans-SemiBold"}}>{person.firstname + ' ' + person.lastname.substr(0, 1) + '.'}</Text>
                     </View>
                     <View className='flex flex-row items-center'>
                       {person.up === -1 ? (
@@ -120,7 +120,7 @@ export default function League({route, navigation}) {
                           color='green'
                         />
                       )}
-                      <Text className='text-blue-800 mx-2'>{person.score} points</Text>
+                      <Text className='text-blue-800 mx-2' style={{fontFamily: "ShantellSans-Regular"}}>{person.score} points</Text>
                     </View>
                   </View>
                 </View>
@@ -129,13 +129,13 @@ export default function League({route, navigation}) {
           })}
           {!userOnLeaderBoard && (
               <View className='flex flex-row items-center w-full border-2 border-gray-300 rounded-xl mb-5 p-2 border-green-300'>
-                <Text className='font-semibold text-blue-950 mr-4'>#{currentUser && currentUser.position}</Text>
+                <Text className='text-blue-950 mr-4' style={{fontFamily: "ShantellSans-Bold"}}>#{currentUser && currentUser.position}</Text>
                 <View className='flex flex-row items-center flex-1 justify-between'>
                   <View className='flex flex-row items-center'>
                     <Image source={require('../public/icons/head_3.png')}
                            className='w-10 h-10 rounded-full mr-2' />
                     <Text
-                        className='font-semibold text-blue-950 text-base'>{currentUser ? currentUser.firstname ? currentUser.lastname ? (currentUser.firstname + ' ' + currentUser.lastname.substr(0, 1) + '.') : "" : "" : ""}</Text>
+                        className='text-blue-950 text-base' style={{fontFamily: "ShantellSans-SemiBold"}}>{currentUser ? currentUser.firstname ? currentUser.lastname ? (currentUser.firstname + ' ' + currentUser.lastname.substr(0, 1) + '.') : "" : "" : ""}</Text>
                   </View>
                   <View className='flex flex-row items-center'>
                     {(currentUser && currentUser.up === -1) ? (
@@ -164,9 +164,10 @@ export default function League({route, navigation}) {
           )}
           {!leagueData.quizDone ? (
               <View className='flex-col items-center justify-center'>
-                <Text className="font-bold text-xl text-blue-900 mb-4">Play this league's questions!</Text>
+                <Text className="text-xl text-blue-900 mb-4" style={{fontFamily: "ShantellSans-Bold"}}>Play this league's questions!</Text>
                   <TouchableOpacity className="bg-blue-400 py-2 px-3 rounded-md">
                       <Text className="text-lg text-white"
+                            style={{fontFamily: "ShantellSans-Bold"}}
                           onPress={() =>
                           navigation.navigate('QuizGame', {
                           userId: userId,
@@ -178,15 +179,15 @@ export default function League({route, navigation}) {
                   </TouchableOpacity>
               </View>
           ) : (
-              <Text className="font-bold text-xl text-blue-900 mb-4">You already played daily quiz.</Text>
+              <Text className="text-xl text-blue-900 mb-4" style={{fontFamily: "ShantellSans-Bold"}}>You already played daily quiz.</Text>
           )}
 
           {leagueId !== 1 && (
               <View className='p-10 items-center justify-center'>
-                <Text className="font-bold text-xl text-blue-900 mb-4">Invite friends with code!</Text>
+                <Text className="text-xl text-blue-900 mb-4" style={{fontFamily: "ShantellSans-Bold"}}>Invite friends with code!</Text>
                 <TouchableOpacity onPress={() => Clipboard.setString(leagueData.invitationCode)}>
                   <View>
-                    <Text className='font-bold text-xl font-light text-blue-800'>
+                    <Text className='text-xl font-light text-blue-800' style={{fontFamily: "ShantellSans-Bold"}}>
                       {leagueData.invitationCode}
                     </Text>
                   </View>

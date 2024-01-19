@@ -58,7 +58,7 @@ export default function SelectCategories({route, navigation}) {
                   className="flex flex-col justify-evenly items-center border-2 rounded-xl h-14 border-green-400"
                   onPress={() => handleSelectedCategories(cat.id)}
                   key={cat.id}>
-                  <Text className="text-blue-950 text-lg font-bold ">
+                  <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-Bold"}}>
                     {cat.name}
                   </Text>
                 </TouchableOpacity>
@@ -67,7 +67,7 @@ export default function SelectCategories({route, navigation}) {
                   className="flex flex-col justify-evenly items-center border-2 border-gray-600 rounded-xl h-14 "
                   onPress={() => handleSelectedCategories(cat.id)}
                   key={cat.id}>
-                  <Text className="text-blue-950 text-lg font-bold ">
+                  <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-Bold"}}>
                     {cat.name}
                   </Text>
                 </TouchableOpacity>
@@ -80,7 +80,7 @@ export default function SelectCategories({route, navigation}) {
               changeUser(userId, {favouriteCategoryIds: newSelected});
               navigation.navigate('Home', {userId: userId, username: username});
             }}>
-            <Text className="text-blue-950 text-lg font-bold ">Confirm</Text>
+            <Text className="text-blue-950 text-lg " style={{fontFamily: "ShantellSans-Bold"}}>Confirm</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.6}
@@ -88,7 +88,7 @@ export default function SelectCategories({route, navigation}) {
             onPress={() =>
               navigation.navigate('Home', {userId: userId, username: username})
             }>
-            <Text className="text-blue-950 text-lg font-bold ">Exit</Text>
+            <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-Bold"}}>Exit</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

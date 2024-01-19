@@ -253,7 +253,7 @@ export default function QuizGame({navigation, route, props}) {
         angleCenter={{x: 0.2, y: 0.5}}
         className="flex items-center flex-1 justify-start height-screen w-full">
         <View className="flex-col items-center ">
-          <Text className="mt-10  text-2xl text-white font-bold">
+          <Text className="mt-10  text-2xl text-white" style={{fontFamily: "ShantellSans-Bold"}}>
             {currentQuestion.categoryName}
           </Text>
           <View className="mt-5">
@@ -279,7 +279,7 @@ export default function QuizGame({navigation, route, props}) {
               elevation: 18,
             }}
             className=" mt-7 rounded-xl items-center width-screen  ml-5 mr-5  animate-pulse">
-            <Text className=" text-l text-white text-center font-bold p-5">
+            <Text className=" text-l text-white text-center p-5" style={{fontFamily: "ShantellSans-Bold"}}>
               {currentQuestion.questionText}
             </Text>
           </View>
@@ -303,13 +303,14 @@ export default function QuizGame({navigation, route, props}) {
                 <Text
                   style={{
                     color: !isCorrect ? '#D70040' : '#63E6BE',
+                    fontFamily: "ShantellSans-Bold"
                   }}
-                  className="font-bold text-center p-2">
+                  className="text-center p-2">
                   {messagge}
                 </Text>
               </View>
               <View className=" mt-1 p-3">
-                <Text className="text-white text-center">
+                <Text className="text-white text-center" style={{fontFamily: "ShantellSans-Regular"}}>
                   {currentQuestion.explanation}
                 </Text>
               </View>
@@ -324,7 +325,7 @@ export default function QuizGame({navigation, route, props}) {
                 onPress={e => {
                   onPress(0);
                 }}>
-                <Text>{questionShuffle.at(0)}</Text>
+                <Text style={{fontFamily: "ShantellSans-Bold"}}>{questionShuffle.at(0)}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.shadow}
@@ -333,7 +334,7 @@ export default function QuizGame({navigation, route, props}) {
                 onPress={() => {
                   onPress(1);
                 }}>
-                <Text>{questionShuffle[1]}</Text>
+                <Text style={{fontFamily: "ShantellSans-Bold"}}>{questionShuffle[1]}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.shadow}
@@ -342,7 +343,7 @@ export default function QuizGame({navigation, route, props}) {
                 onPress={() => {
                   onPress(2);
                 }}>
-                <Text>{questionShuffle[2]}</Text>
+                <Text style={{fontFamily: "ShantellSans-Bold"}}>{questionShuffle[2]}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.shadow}
@@ -351,7 +352,7 @@ export default function QuizGame({navigation, route, props}) {
                 onPress={() => {
                   onPress(3);
                 }}>
-                <Text>{questionShuffle[3]}</Text>
+                <Text style={{fontFamily: "ShantellSans-Bold"}}>{questionShuffle[3]}</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -378,7 +379,7 @@ export default function QuizGame({navigation, route, props}) {
                   updateQuestion();
                 }
               }}>
-              <Text className="text-white text-center p-1 object-right">
+              <Text className="text-white text-center p-1 object-right" style={{fontFamily: "ShantellSans-Bold"}}>
                 {'Next ->'}
               </Text>
             </TouchableOpacity>

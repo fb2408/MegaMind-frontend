@@ -93,10 +93,10 @@ export default function QuizComplete({navigation, route}) {
         angleCenter={{x: 0.2, y: 0.5}}
         className="flex-col items-center flex-1 height-screen justify-start height-screen w-full">
         <View className="mt-10 text-center">
-          <Text className=" text-2xl text-center text-white">
+          <Text className=" text-2xl text-center text-white" style={{fontFamily: "ShantellSans-Bold"}}>
             {'Congratulations ' + userName}
           </Text>
-          <Text className="text-white text-center">
+          <Text className="text-white text-center" style={{fontFamily: "ShantellSans-Regular"}}>
             {'Successfully solved your quiz!'}
           </Text>
         </View>
@@ -121,8 +121,8 @@ export default function QuizComplete({navigation, route}) {
           />
         </View>
         <Text
-          style={{color: '#63E6BE'}}
-          className="mt-5 text-2xl text-center font-bold">
+          style={{color: '#63E6BE', fontFamily: "ShantellSans-Bold"}}
+          className="mt-5 text-2xl text-center">
           {'Your score is ' + score}
         </Text>
         <View
@@ -146,7 +146,7 @@ export default function QuizComplete({navigation, route}) {
               <View
                 style={{backgroundColor: '#63E6BE'}}
                 className=" rounded-xl p-5 mt-3 ml-3  mr-3">
-                <Text className="text-white text-base text-center font-bold">
+                <Text className="text-white text-base text-center" style={{fontFamily: "ShantellSans-Regular"}}>
                   {'All answers are correct. You earned bonus 20 points'}
                 </Text>
               </View>
@@ -171,14 +171,15 @@ export default function QuizComplete({navigation, route}) {
                         style={{
                           color: '#63E6BE',
                           opacity: 1,
+                          fontFamily: "ShantellSans-Bold"
                         }}
-                        className="text-white opacity-1 font-bold">
+                        className="text-white opacity-1">
                         {String(category.categoryName).toUpperCase()}
                       </Text>
-                      <Text className="text-white">
+                      <Text className="text-white" style={{fontFamily: "ShantellSans-Regular"}}>
                         {category.points + ' obtained points'}
                       </Text>
-                      <Text className="text-white">
+                      <Text className="text-white" style={{fontFamily: "ShantellSans-Regular"}}>
                         {String(
                           (parseFloat(category.numberOfCorrect) /
                             parseFloat(category.numberOfQuestions)) *
@@ -208,7 +209,7 @@ export default function QuizComplete({navigation, route}) {
               });
             }
           }}>
-          <Text className="text-white p-1 text-lg text-center">
+          <Text className="text-white p-1 text-lg text-center" >
             {'Next ->'}
           </Text>
         </Pressable>

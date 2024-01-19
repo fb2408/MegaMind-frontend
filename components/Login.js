@@ -43,18 +43,20 @@ export default function Login({navigation}) {
         </View>
         <View className="flex justify-start items-center rounded-xl bg-white w-full p-5">
           <Text className='text-blue-950 text-4xl my-6' style={{fontFamily: 'ShantellSans-Bold'}}>Login</Text>
-          {errorMessage ? <Text className="text-xl font-bold text-red-700">{errorMessage}</Text> : <></>}
+          {errorMessage ? <Text className="text-xl text-red-700" style={{fontFamily: "ShantellSans-Bold"}}>{errorMessage}</Text> : <></>}
           <View className="flex justify-start items-start w-full p-4">
-            <Text className="text-blue-950 text-lg">Username</Text>
+            <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-SemiBold"}}>Username</Text>
             <TextInput
+              style={{fontFamily: "ShantellSans-Regular"}}
               onChangeText={setUserame}
               className="rounded-md h-14 p-4 my-2 w-full shadow-sm shadow-blue-950"
               placeholder="example123"
             />
           </View>
           <View className="flex justify-start items-start w-full p-4">
-            <Text className="text-blue-950 text-lg">Password</Text>
+            <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-SemiBold"}}>Password</Text>
             <TextInput
+              style={{fontFamily: "ShantellSans-Regular"}}
               onChangeText={setPassword}
               className="rounded-md h-14 p-4 my-2 w-full shadow-sm shadow-blue-950"
               placeholder="****"
@@ -65,7 +67,7 @@ export default function Login({navigation}) {
             <TouchableOpacity
               onPress={() => submitLogin()}
               className="flex justify-center items-center bg-blue-400 mt-6 px-5 py-3 rounded-md">
-              <Text className="text-white text-base font-semibold">Log in</Text>
+              <Text className="text-white text-base" style={{fontFamily: "ShantellSans-SemiBold"}}>Log in</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
@@ -73,7 +75,7 @@ export default function Login({navigation}) {
                 navigation.navigate('SignUp')
               }}
               className="flex justify-center items-center bg-gray-400 mt-6 ml-5 px-5 py-3 rounded-md">
-              <Text className="text-white text-base font-semibold">Sign up</Text>
+              <Text className="text-white text-base" style={{fontFamily: "ShantellSans-SemiBold"}}>Sign up</Text>
             </TouchableOpacity>
           </View>
         </View>

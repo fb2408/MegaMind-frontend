@@ -90,32 +90,36 @@ export default function SignUp({navigation}) {
             </Text>
             {errorMessage ? <Text className="text-xl font-bold text-red-700">{errorMessage}</Text> : <></>}
             <View className="flex justify-start items-start w-full p-2">
-              <Text className="text-blue-950 text-lg">Username</Text>
+              <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-SemiBold"}}>Username</Text>
               <TextInput
+                style={{fontFamily: "ShantellSans-Regular"}}
                 onChangeText={setUserame}
                 className="rounded-md h-14 p-4 w-full shadow-sm shadow-blue-950"
                 placeholder="example123"
               />
             </View>
             <View className="flex justify-start items-start w-full p-2">
-              <Text className="text-blue-950 text-lg">First name</Text>
+              <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-SemiBold"}}>First name</Text>
               <TextInput
+                style={{fontFamily: "ShantellSans-Regular"}}
                 onChangeText={setFirstName}
                 className="rounded-md h-14 p-4 w-full shadow-sm shadow-blue-950"
                 placeholder="Ivo"
               />
             </View>
             <View className="flex justify-start items-start w-full p-2">
-              <Text className="text-blue-950 text-lg">Last name</Text>
+              <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-SemiBold"}}>Last name</Text>
               <TextInput
+                style={{fontFamily: "ShantellSans-Regular"}}
                 onChangeText={setLastName}
                 className="rounded-md h-14 p-4 w-full shadow-sm shadow-blue-950"
                 placeholder="Ivić"
               />
             </View>
             <View className="flex justify-start items-start w-full p-2">
-              <Text className="text-blue-950 text-lg">Password</Text>
+              <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-SemiBold"}}>Password</Text>
               <TextInput
+                style={{fontFamily: "ShantellSans-Regular"}}
                 onChangeText={setPassword}
                 className="rounded-md h-14 p-4 w-full shadow-sm shadow-blue-950"
                 placeholder="****"
@@ -123,14 +127,14 @@ export default function SignUp({navigation}) {
               />
             </View>
             <View className="flex justify-start items-start w-full p-2">
-              <Text className="text-blue-950 text-lg">
+              <Text className="text-blue-950 text-lg" style={{fontFamily: "ShantellSans-SemiBold"}}>
                 Favourite categories
               </Text>
               <TouchableOpacity
                 onPress={() => setModalVisible(true)}
                 className="w-full flex justify-center items-center p-2 rounded-md mt-2"
                 style={{backgroundColor: '#63E6BE'}}>
-                <Text className="text-white text-lg font-semibold">
+                <Text className="text-white text-lg " style={{fontFamily: "ShantellSans-Bold"}}>
                   Choose...
                 </Text>
               </TouchableOpacity>
@@ -160,7 +164,7 @@ export default function SignUp({navigation}) {
                           key={index}
                           onPress={() => handlePress(category.id)}
                           className="w-48 h-12 rounded-xl mb-2 flex justify-center items-center ">
-                          <Text className="text-white font-semibold">
+                          <Text className="text-white" style={{fontFamily: "ShantellSans-Bold"}}>
                             {category.name}
                           </Text>
                         </Pressable>
@@ -179,7 +183,7 @@ export default function SignUp({navigation}) {
               <TouchableOpacity
                 onPress={() => submitRegistration()}
                 className="flex justify-center items-center bg-blue-500 mt-4 px-5 py-3 rounded-md">
-                <Text className="text-white text-base font-semibold">
+                <Text className="text-white text-base" style={{fontFamily: "ShantellSans-SemiBold"}}>
                   Sign up
                 </Text>
               </TouchableOpacity>
@@ -226,7 +230,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'ShantellSans-Bold',
     textAlign: 'center',
   },
   modalText: {

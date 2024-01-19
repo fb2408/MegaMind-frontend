@@ -53,12 +53,12 @@ export default function Profile({navigation, route}) {
           colors={['rgb(30 64 175)', 'rgb(23 37 84)']}
           useAngle={true} angle={45} angleCenter={{x: 0.2, y: 0.5}}
           className='flex items-center justify-start h-1/4 w-full'>
-          <Text className='text-white font-black text-4xl mt-6'>Profile</Text>
+          <Text className='text-white text-4xl mt-6' style={{fontFamily: "ShantellSans-Bold"}}>Profile</Text>
         </LinearGradient>
 
         <View className='flex w-full p-5 bg-white rounded-3xl items-center absolute top-32 bottom-0'>
-          <Text className='text-blue-950 font-bold text-xl mt-12 mb-2'>{data.firstname + ' ' + data.lastname}</Text>
-          <Text className='text-blue-800 mb-5'>@{data.userName}</Text>
+          <Text className='text-blue-950 text-xl mt-12 mb-2' style={{fontFamily: "ShantellSans-Bold"}}>{data.firstname + ' ' + data.lastname}</Text>
+          <Text className='text-blue-800 mb-5' style={{fontFamily: "ShantellSans-Regular"}}>@{data.userName}</Text>
           <View className='flex flex-row w-full justify-between flex-wrap'>
 
             <View className="border-2 border-gray-200 rounded-xl flex items-center px-3 py-5" style={styles.container}>
@@ -67,8 +67,8 @@ export default function Profile({navigation, route}) {
                 size={36}
                 color='#A0522D'
               />
-              <Text className="text-blue-950 font-bold text-xl mt-2 mb-1">#{data.globalLeagueRank}</Text>
-              <Text className="text-blue-800">World rank</Text>
+              <Text className="text-blue-950 text-lg mt-2 mb-1" style={{fontFamily: "ShantellSans-Bold"}}>#{data.globalLeagueRank}</Text>
+              <Text className="text-blue-800" style={{fontFamily: "ShantellSans-Regular"}}>World rank</Text>
             </View>
 
             <View className='border-2 border-gray-200 rounded-xl flex items-center px-3 py-5' style={styles.container}>
@@ -77,8 +77,8 @@ export default function Profile({navigation, route}) {
                 size={36}
                 color='#FFDB58'
               />
-              <Text className='text-blue-950 font-bold text-xl mt-2 mb-1'>#{data.level}</Text>
-              <Text className='text-blue-800'>Level</Text>
+              <Text className='text-blue-950 text-lg mt-2 mb-1' style={{fontFamily: "ShantellSans-Bold"}}>#{data.level}</Text>
+              <Text className='text-blue-800' style={{fontFamily: "ShantellSans-Regular"}}>Level</Text>
             </View>
 
             <View className='border-2 border-gray-200 rounded-xl flex items-center px-3 py-5' style={styles.container}>
@@ -87,8 +87,8 @@ export default function Profile({navigation, route}) {
                 size={36}
                 color='purple'
               />
-              <Text className='text-blue-950 font-bold text-xl mt-2 mb-1'>#{data.userXp}</Text>
-              <Text className='text-blue-800'>Experience</Text>
+              <Text className='text-blue-950 text-lg mt-2 mb-1' style={{fontFamily: "ShantellSans-Bold"}}>#{data.userXp}</Text>
+              <Text className='text-blue-800' style={{fontFamily: "ShantellSans-Regular"}}>Experience</Text>
             </View>
 
             <View className='border-2 border-gray-200 rounded-xl flex items-center px-3 py-5 mt-3'
@@ -98,8 +98,8 @@ export default function Profile({navigation, route}) {
                 size={36}
                 color='#FFDEAD'
               />
-              <Text className='text-blue-950 font-bold text-xl mt-2 mb-1'>#{data.answeredQuestions}</Text>
-              <Text className='text-blue-800'>Answered</Text>
+              <Text className='text-blue-950 text-lg mt-2 mb-1' style={{fontFamily: "ShantellSans-Bold"}}>#{data.answeredQuestions}</Text>
+              <Text className='text-blue-800' style={{fontFamily: "ShantellSans-Regular"}}>Answered</Text>
             </View>
 
             <View className='border-2 border-gray-200 rounded-xl flex items-center px-3 py-5 mt-3'
@@ -110,8 +110,8 @@ export default function Profile({navigation, route}) {
                 color='green'
               />
               <Text
-                className='text-blue-950 font-bold text-xl mt-2 mb-1'>#{data.answeredQuestions ? Math.round((data.answeredCorrect / data.answeredQuestions) * 100) : 0}%</Text>
-              <Text className='text-blue-800'>Correct</Text>
+                className='text-blue-950 text-lg mt-2 mb-1' style={{fontFamily: "ShantellSans-Bold"}}>#{data.answeredQuestions ? Math.round((data.answeredCorrect / data.answeredQuestions) * 100) : 0}%</Text>
+              <Text className='text-blue-800' style={{fontFamily: "ShantellSans-Regular"}}>Correct</Text>
             </View>
 
             <View className='border-2 border-gray-200 rounded-xl flex items-center px-3 py-5 mt-3'
@@ -122,13 +122,13 @@ export default function Profile({navigation, route}) {
                 color='red'
               />
               <Text
-                className='text-blue-950 font-bold text-xl mt-2 mb-1'>#{data.answeredQuestions ? Math.round(((data.answeredQuestions - data.answeredCorrect) / data.answeredQuestions) * 100) : 0}%</Text>
-              <Text className='text-blue-800'>Incorrect</Text>
+                className='text-blue-950 text-lg mt-2 mb-1' style={{fontFamily: "ShantellSans-Bold"}}>#{data.answeredQuestions ? Math.round(((data.answeredQuestions - data.answeredCorrect) / data.answeredQuestions) * 100) : 0}%</Text>
+              <Text className='text-blue-800' style={{fontFamily: "ShantellSans-Regular"}}>Incorrect</Text>
             </View>
 
           </View>
 
-          <Text className='text-blue-950 font-semibold text-base m-5'>Accuracy by category</Text>
+          <Text className='text-blue-950 text-lg m-5' style={{fontFamily: "ShantellSans-Bold"}}>Accuracy by category</Text>
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {data.categories && data.categories.map((category, index) => {
@@ -140,8 +140,8 @@ export default function Profile({navigation, route}) {
                       size={20}
                       color="rgb(23 37 84)"
                     />
-                    <Text className="text-blue-800 text-xs">{category.categoryName.substr(0, 7)}</Text>
-                    <Text className="text-blue-800 text-xs">{category.answerPercentage ? Math.round(category.answerPercentage * 100) : 0}%</Text>
+                    <Text className="text-blue-800 text-xs" style={{fontFamily: "ShantellSans-Regular"}}>{category.categoryName.substr(0, 7)}</Text>
+                    <Text className="text-blue-800 text-xs" style={{fontFamily: "ShantellSans-Regular"}}>{category.answerPercentage ? Math.round(category.answerPercentage * 100) : 0}%</Text>
                   </View>)
             })}
           </ScrollView>
