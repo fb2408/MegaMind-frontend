@@ -1,10 +1,20 @@
-import {Animated, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default function QuizGame({navigation, route, props}) {
-  const {userId, leagueId} = route.params;
+  const {userId, Id, userName, isLeagueQuiz} = route.params;
+
+  console.log(userId);
+  console.log('isLeagueQuiz' + isLeagueQuiz);
+  let leagueId;
+  let categoryId;
+  if (isLeagueQuiz) {
+    leagueId = Id;
+  } else {
+    categoryId = Id;
+  }
 
   const [showExplanationAndMessage, setShowExplanationAndMessage] =
     useState(false);
@@ -21,7 +31,8 @@ export default function QuizGame({navigation, route, props}) {
   let [questionShuffle, setQuestionShuffle] = useState([]);
   let [isCorrect, setIsCorrect] = useState(false);
 
-  const [currentCategoryIcon, setCurrentCategoryIcon] = useState('History');
+  const [numOfQuestionsInCategory, setNumOfQuestionsInCategory] = useState(0);
+  const [currentCategoryIcon, setCurrentCategoryIcon] = useState('book-open');
   const categoryIcons = [
     {categoryName: 'History', iconName: 'book-open'},
     {categoryName: 'Music', iconName: 'music'},
@@ -29,18 +40,28 @@ export default function QuizGame({navigation, route, props}) {
     {categoryName: 'Art', iconName: 'palette'},
     {categoryName: 'Geography', iconName: 'globe-americas'},
     {categoryName: 'Movies', iconName: 'film'},
+    {categoryName: 'Science', iconName: 'bacteria'},
+    {categoryName: 'Food', iconName: 'drumstick-bite'},
+    {categoryName: 'Technology', iconName: 'robot'},
+    {categoryName: 'Pop-culture', iconName: 'tv'},
   ];
 
-  var url =
-    'https://mega-mind-backend-2fe25339801f.herokuapp.com/questions/' +
-    JSON.stringify(leagueId) +
-    '/user/' +
-    JSON.stringify(userId);
+  var url = isLeagueQuiz
+    ? 'https://mega-mind-backend-2fe25339801f.herokuapp.com/questions/' +
+      JSON.stringify(leagueId) +
+      '/user/' +
+      JSON.stringify(userId)
+    : 'https://mega-mind-backend-2fe25339801f.herokuapp.com/questions/user/' +
+      JSON.stringify(userId) +
+      '/category/' +
+      JSON.stringify(categoryId);
 
   const getQuestionsFromApi = async () => {
+    console.log(url);
     return await fetch(url)
       .then(response => response.json())
       .then(json => {
+        console.log(json.questions);
         setQuestions(json.questions);
         setCurrentQuestion(json.questions[0]);
         console.log('appi callled');
@@ -61,6 +82,10 @@ export default function QuizGame({navigation, route, props}) {
           }
         });
         setCurrentCategoryIcon(currCategoryName);
+        let categories = json.questions
+          .map(question => question.categoryName)
+          .filter(onlyUnique);
+        setNumOfQuestionsInCategory(json.questions.length / categories.length);
         return json;
       })
       .catch(error => {
@@ -91,13 +116,8 @@ export default function QuizGame({navigation, route, props}) {
     return array;
   }
 
-  const categories = questions
-    .map(question => question.categoryName)
-    .filter(onlyUnique);
-  const numOfQuestionsInCategory = questions.length / categories.length;
-
   function forwardDataOnBackend() {
-    console.log(answers);
+    console.log('answers');
   }
 
   const onPress = async questionShuffleId => {
@@ -131,7 +151,7 @@ export default function QuizGame({navigation, route, props}) {
 
     setShowExplanationAndMessage(true);
     setNextButtonVisible(true);
-    fadeIn();
+    // fadeIn();
   };
 
   function updateQuestion() {
@@ -202,27 +222,27 @@ export default function QuizGame({navigation, route, props}) {
 
       setShowExplanationAndMessage(false);
       setNextButtonVisible(false);
-      fadeOut();
+      // fadeOut();
     }
   }
 
-  let fadeAnim = useRef(new Animated.Value(0)).current;
+  // let fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const fadeIn = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 5000,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 3000,
-      useNativeDriver: true,
-    }).start();
-  };
+  // const fadeIn = () => {
+  //   Animated.timing(fadeAnim, {
+  //     toValue: 1,
+  //     duration: 5000,
+  //     useNativeDriver: true,
+  //   }).start();
+  // };
+  //
+  // const fadeOut = () => {
+  //   Animated.timing(fadeAnim, {
+  //     toValue: 0,
+  //     duration: 3000,
+  //     useNativeDriver: true,
+  //   }).start();
+  // };
 
   return (
     <View className=" h-screen ">
@@ -239,7 +259,7 @@ export default function QuizGame({navigation, route, props}) {
           <View className="mt-5">
             <Icon
               className="bg-blue-900"
-              name={currentCategoryIcon}
+              name={String(currentCategoryIcon)}
               size={150}
               // color="#172554"
             />
@@ -248,7 +268,7 @@ export default function QuizGame({navigation, route, props}) {
           <View
             style={{
               backgroundColor: '#172554',
-              shadowColor: '#000',
+              shadowColor: '#fff',
               shadowOffset: {
                 width: 0,
                 height: 9,
@@ -265,22 +285,14 @@ export default function QuizGame({navigation, route, props}) {
           </View>
 
           {showExplanationAndMessage && (
-            <Animated.View
-              style={[
-                {
-                  opacity: fadeAnim,
-                },
-              ]}
-              className="mt-10 bg-blue-400 flex-col rounded-xl items-center width-screen  ml-5 mr-5 h-40 animate-pulse">
+            <View className="mt-10 bg-blue-400 flex-col rounded-xl items-center width-screen  ml-5 mr-5 h-50 animate-pulse">
               <View
                 style={[
                   // styles.shadow,
                   {
                     borderWidth: 3,
                     // borderColor: 'rgba(255, 0, 0, 1)',
-                    borderColor: !isCorrect
-                      ? 'rgba(255, 0, 0, 0.5)'
-                      : 'rgba(60, 179, 113, 1)',
+                    borderColor: !isCorrect ? '#D70040' : '#63E6BE',
                     width: '100%',
                     // color: !isCorrect
                     //   ? 'rgba(255, 0, 0, 0.5)'
@@ -290,9 +302,7 @@ export default function QuizGame({navigation, route, props}) {
                 className=" mt-5  bg-white items-center rounded-xl  ml-3 mr-3">
                 <Text
                   style={{
-                    color: !isCorrect
-                      ? 'rgba(255, 0, 0, 0.5)'
-                      : 'rgba(60, 179, 113, 1)',
+                    color: !isCorrect ? '#D70040' : '#63E6BE',
                   }}
                   className="font-bold text-center p-2">
                   {messagge}
@@ -303,7 +313,7 @@ export default function QuizGame({navigation, route, props}) {
                   {currentQuestion.explanation}
                 </Text>
               </View>
-            </Animated.View>
+            </View>
           )}
           {!showExplanationAndMessage && (
             <View className="flex flex-row justify-evenly w-full flex-wrap mt-10">
@@ -351,7 +361,23 @@ export default function QuizGame({navigation, route, props}) {
                 backgroundColor: '#172554',
               }}
               className=" mt-10  left rounded-s  w-24 h-7"
-              onPress={() => updateQuestion()}>
+              onPress={() => {
+                if (
+                  currentCategoryId * numOfQuestionsInCategory +
+                    currentQuestionInCategory ===
+                  questions.length - 1
+                ) {
+                  navigation.navigate('QuizComplete', {
+                    answersToBack: answers,
+                    userId: userId,
+                    Id: Id,
+                    userName: userName,
+                    isLeagueQuiz: isLeagueQuiz,
+                  });
+                } else {
+                  updateQuestion();
+                }
+              }}>
               <Text className="text-white text-center p-1 object-right">
                 {'Next ->'}
               </Text>
