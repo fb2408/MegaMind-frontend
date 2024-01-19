@@ -49,7 +49,7 @@ export default function App() {
         <Stack.Screen
           name="QuizGame"
           component={QuizGame}
-          options={{headerShown: false, animation: 'none'}}
+          options={{headerShown: false, animation: 'slide_from_right'}}
         />
         <Stack.Screen
           name="QuizComplete"
