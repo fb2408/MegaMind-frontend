@@ -42,8 +42,8 @@ export default function League({route, navigation}) {
   function setFirstThreeOrder(users) {
     let arr = [];
     if (users.length > 1)  arr.push(users[1]);
-    if (users.length > 2) arr.push(users[0]);
-    if (users.length > 3) arr.push(users[2]);
+    if (users.length > 0) arr.push(users[0]);
+    if (users.length > 2) arr.push(users[2]);
     setFirstThree(arr);
   }
 

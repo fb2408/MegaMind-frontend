@@ -53,7 +53,7 @@ export default function Leagues({navigation, route}) {
   const createLeague = () => {
     const data = {
       leagueName: leagueName,
-      leagueAdmin: 4,
+      leagueAdmin: userId,
       seasonLength: leagueLength,
       startDate: date.toISOString().substr(0,10),
       dailyCategories: dailyCategories,
