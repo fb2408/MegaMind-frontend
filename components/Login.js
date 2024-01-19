@@ -9,6 +9,7 @@ export default function Login({navigation}) {
 
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const submitLogin = () => {
     const data = {
@@ -17,9 +18,11 @@ export default function Login({navigation}) {
     }
     loginPost(data).then(res => {
       if(res.userId !== undefined) {
+        setPassword('');
         navigation.navigate('Home', {userId: res.userId, username: res.username});
       } else {
         console.log(res)
+        setErrorMessage("Wrong username or password");
       }
     })
   }
@@ -40,6 +43,7 @@ export default function Login({navigation}) {
         </View>
         <View className="flex justify-start items-center rounded-xl bg-white w-full p-5">
           <Text className='text-blue-950 text-4xl my-6' style={{fontFamily: 'ShantellSans-Bold'}}>Login</Text>
+          {errorMessage ? <Text className="text-xl font-bold text-red-700">{errorMessage}</Text> : <></>}
           <View className="flex justify-start items-start w-full p-4">
             <Text className="text-blue-950 text-lg">Username</Text>
             <TextInput
@@ -64,7 +68,10 @@ export default function Login({navigation}) {
               <Text className="text-white text-base font-semibold">Log in</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('SignUp')}
+              onPress={() => {
+                setErrorMessage('')
+                navigation.navigate('SignUp')
+              }}
               className="flex justify-center items-center bg-gray-400 mt-6 ml-5 px-5 py-3 rounded-md">
               <Text className="text-white text-base font-semibold">Sign up</Text>
             </TouchableOpacity>

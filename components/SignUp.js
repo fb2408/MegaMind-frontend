@@ -24,6 +24,7 @@ export default function SignUp({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const isFocused = useIsFocused();
 
@@ -55,7 +56,12 @@ export default function SignUp({navigation}) {
 
     registerPost(data).then(res => {
       console.log(res);
-      navigation.navigate('Home', {userId: res.id, username: username});
+      if(res.error) {
+        setErrorMessage("Username already exists")
+      } else {
+        setErrorMessage('');
+        navigation.navigate('Home', {userId: res.id, username: username});
+      }
     });
   };
 
@@ -82,6 +88,7 @@ export default function SignUp({navigation}) {
               style={{fontFamily: 'ShantellSans-Bold'}}>
               Registration
             </Text>
+            {errorMessage ? <Text className="text-xl font-bold text-red-700">{errorMessage}</Text> : <></>}
             <View className="flex justify-start items-start w-full p-2">
               <Text className="text-blue-950 text-lg">Username</Text>
               <TextInput
