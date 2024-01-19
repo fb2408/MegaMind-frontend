@@ -53,7 +53,7 @@ export default function League({route, navigation}) {
         <View className='m-5 flex-1 flex items-center'>
           <Text className='font-black text-3xl text-blue-950 mt-2 mb-6'>Leaderboard</Text>
           <Text className='font-bold text-lg text-blue-900 mb-6'>Today</Text>
-          <View className='flex flex-row justify-between items-end w-full mb-6'>
+          <View className='flex flex-row justify-around items-end w-full mb-6'>
             {firstThree && firstThree.map((person, index) => {
               if (index === 1) {
                 return (
