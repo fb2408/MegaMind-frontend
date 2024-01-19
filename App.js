@@ -10,6 +10,7 @@ import SelectCategories from './components/SelectCategories';
 import QuizGame from './components/QuizGame';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import QuizComplete from './components/QuizComplete';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,6 +50,11 @@ export default function App() {
           name="QuizGame"
           component={QuizGame}
           options={{headerShown: false, animation: 'none'}}
+        />
+        <Stack.Screen
+          name="QuizComplete"
+          component={QuizComplete}
+          options={{headerShown: false, animation: 'slide_from_right'}}
         />
         <Stack.Screen
           name="Login"
