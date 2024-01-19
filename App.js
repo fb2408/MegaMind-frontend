@@ -24,7 +24,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false, animation: 'slide_from_righte'}}
+          options={{headerShown: false, animation: 'slide_from_right'}}
         />
         <Stack.Screen
           name="Leagues"
