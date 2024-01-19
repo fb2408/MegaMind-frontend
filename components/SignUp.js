@@ -13,7 +13,6 @@ export default function SignUp({navigation}) {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -39,7 +38,6 @@ export default function SignUp({navigation}) {
 
   const submitRegistration = () => {
     const data = {
-      mail: email,
       userName: username,
       firstname: firstName,
       lastname: lastName,
@@ -59,8 +57,8 @@ export default function SignUp({navigation}) {
         <LinearGradient
           colors={['rgb(30 64 175)', 'rgb(23 37 84)']}
           useAngle={true} angle={45} angleCenter={{x: 0.2, y: 0.5}}
-          className='flex-1 items-center justify-start w-full p-10'>
-          <View className='flex justify-center items-center mb-10'>
+          className='flex-1 items-center justify-start w-full px-10 py-5'>
+          <View className='flex justify-center items-center mb-5'>
             <Text className='text-white text-4xl mt-6' style={{fontFamily: 'ShantellSans-Bold'}}>MegaMind</Text>
             <Icon
               color='white'
@@ -69,16 +67,8 @@ export default function SignUp({navigation}) {
             />
           </View>
           <View className='flex justify-start items-center rounded-xl bg-white w-full p-5'>
-            <Text className='text-blue-950 text-4xl my-6' style={{fontFamily: 'ShantellSans-Bold'}}>Registration</Text>
-            <View className='flex justify-start items-start w-full p-4'>
-              <Text className='text-blue-950 text-lg'>E-mail</Text>
-              <TextInput
-                onChangeText={setEmail}
-                className='rounded-md h-14 p-4 w-full shadow-sm shadow-blue-950'
-                placeholder='example@yahoo.com'
-              />
-            </View>
-            <View className='flex justify-start items-start w-full p-4'>
+            <Text className='text-blue-950 text-4xl my-2' style={{fontFamily: 'ShantellSans-Bold'}}>Registration</Text>
+            <View className='flex justify-start items-start w-full p-2'>
               <Text className='text-blue-950 text-lg'>Username</Text>
               <TextInput
                 onChangeText={setUserame}
@@ -86,7 +76,7 @@ export default function SignUp({navigation}) {
                 placeholder='example123'
               />
             </View>
-            <View className='flex justify-start items-start w-full p-4'>
+            <View className='flex justify-start items-start w-full p-2'>
               <Text className='text-blue-950 text-lg'>First name</Text>
               <TextInput
                 onChangeText={setFirstName}
@@ -94,7 +84,7 @@ export default function SignUp({navigation}) {
                 placeholder='Ivo'
               />
             </View>
-            <View className='flex justify-start items-start w-full p-4'>
+            <View className='flex justify-start items-start w-full p-2'>
               <Text className='text-blue-950 text-lg'>Last name</Text>
               <TextInput
                 onChangeText={setLastName}
@@ -102,7 +92,7 @@ export default function SignUp({navigation}) {
                 placeholder='Ivić'
               />
             </View>
-            <View className='flex justify-start items-start w-full p-4'>
+            <View className='flex justify-start items-start w-full p-2'>
               <Text className='text-blue-950 text-lg'>Password</Text>
               <TextInput
                 onChangeText={setPassword}
@@ -111,12 +101,13 @@ export default function SignUp({navigation}) {
                 secureTextEntry={true}
               />
             </View>
-            <View className='flex justify-start items-start w-full p-4'>
+            <View className='flex justify-start items-start w-full p-2'>
               <Text className='text-blue-950 text-lg'>Favourite categories</Text>
               <TouchableOpacity
                 onPress={() => setModalVisible(true)}
-                className="bg-blue-600 w-full flex justify-center items-center p-2 rounded-md mt-2">
-                <Text className="text-white text-lg">Choose...</Text>
+                className="w-full flex justify-center items-center p-2 rounded-md mt-2"
+              style={{backgroundColor: "#63E6BE"}}>
+                <Text className="text-white text-lg font-semibold">Choose...</Text>
               </TouchableOpacity>
             </View>
 
@@ -130,15 +121,14 @@ export default function SignUp({navigation}) {
               }}>
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <Text className="mb-2 text-red-700 font-semibold text-lg">Minimum 3!</Text>
                   {categories && categories.map((category, index) => {
                     return(
                       <Pressable
-                        style={{backgroundColor: selectedCategories.includes(category.id) ? "gray" : "rgb(23 37 84)"}}
+                        style={{backgroundColor: selectedCategories.includes(category.id) ? "#63E6BE" : "rgb(30 58 138)"}}
                         key={index}
                         onPress={() => handlePress(category.id)}
                         className="w-48 h-12 rounded-xl mb-2 flex justify-center items-center ">
-                        <Text className="text-white">{category.name}</Text>
+                        <Text className="text-white font-semibold">{category.name}</Text>
                       </Pressable>
                     )
                   })}
@@ -151,10 +141,10 @@ export default function SignUp({navigation}) {
               </View>
             </Modal>
 
-            <View className='flex flex-row justify-center items-center mb-6'>
+            <View className='flex flex-row justify-center items-center'>
               <TouchableOpacity
                 onPress={() => submitRegistration()}
-                className='flex justify-center items-center bg-gray-400 mt-6 px-5 py-3 rounded-md'>
+                className='flex justify-center items-center bg-blue-500 mt-4 px-5 py-3 rounded-md'>
                 <Text className='text-white text-base font-semibold'>Sign up</Text>
               </TouchableOpacity>
             </View>

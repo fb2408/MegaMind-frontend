@@ -135,7 +135,7 @@ export default function Home({navigation, route}) {
                 </TouchableOpacity>
               ))}
             <TouchableOpacity
-              className="flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-3"
+              className="flex flex-col justify-evenly items-center border-2 border-gray-300 rounded-xl w-40 h-32 mt-7"
               onPress={() =>
                 navigation.navigate('SelectCategories', {
                   selected: homeData.favouriteCategories ? homeData.favouriteCategories.map(

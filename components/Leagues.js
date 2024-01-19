@@ -53,13 +53,14 @@ export default function Leagues({navigation, route}) {
   const createLeague = () => {
     const data = {
       leagueName: leagueName,
-      leagueAdmin: 4,
+      leagueAdmin: userId,
       seasonLength: leagueLength,
       startDate: date.toISOString().substr(0,10),
       dailyCategories: dailyCategories,
       questionsPerCategory: questionsPerCategory,
       leagueCategories: selectedCategories,
     };
+    console.log(data)
     createLeaguePost(data).then(res => {
       console.log(res);
       setVisibleCreate(false);
@@ -99,19 +100,19 @@ export default function Leagues({navigation, route}) {
     <View className='flex-1'>
       <ScrollView>
         <View className='flex-1 justify-start items-start m-5'>
-          <Text className='font-black text-3xl text-blue-950 mb-4'>My leagues</Text>
+          <Text className='font-black text-3xl text-blue-950 mb-5'>My leagues</Text>
           {leagues.leagues && leagues.leagues.sort((a, b) => a.leagueId - b.leagueId)
               .map((league, index) => {
             return (
               <TouchableOpacity activeOpacity={0.4}
-                                className='border-2 border-gray-300 rounded-2xl p-5 w-full mt-4 flex justify-center items-center'
+                                className='border-2 border-gray-300 rounded-2xl p-5 w-full mb-4 flex justify-center items-center'
                                 onPress={() => navigation.navigate('League', {leagueId: league.leagueId, userId: userId, username: username})}
                                 key={league.leagueId}>
                 <Text className='font-bold text-lg text-blue-950'>{league.leagueName}</Text>
               </TouchableOpacity>
             );
           })}
-          <View className='flex-row justify-around items-center my-8 w-full'>
+          <View className='flex-row justify-around items-center my-4 w-full'>
             <TouchableOpacity activeOpacity={0.6}
                               className='bg-blue-300 rounded-md w-2/5 flex items-center justify-center py-3'
                               onPress={() => {
@@ -207,11 +208,11 @@ export default function Leagues({navigation, route}) {
                       {categories && categories.map((category, index) => {
                         return(
                           <Pressable
-                            style={{backgroundColor: selectedCategories.includes(category.id) ? "gray" : "rgb(23 37 84)"}}
+                            style={{backgroundColor: selectedCategories.includes(category.id) ? "#63E6BE" : "rgb(23 37 84)"}}
                             key={index}
                             onPress={() => handlePress(category.id)}
                             className="w-48 h-12 rounded-xl mb-2 flex justify-center items-center ">
-                            <Text className="text-white">{category.name}</Text>
+                            <Text className="text-white font-semibold">{category.name}</Text>
                           </Pressable>
                         )
                       })}
