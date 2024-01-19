@@ -43,7 +43,7 @@ export default function QuizGame({navigation, route, props}) {
     {categoryName: 'Science', iconName: 'bacteria'},
     {categoryName: 'Food', iconName: 'drumstick-bite'},
     {categoryName: 'Technology', iconName: 'robot'},
-    {categoryName: 'Pop-culture', iconName: 'tv'},
+    {categoryName: 'Pop', iconName: 'tv'},
   ];
 
   var url = isLeagueQuiz

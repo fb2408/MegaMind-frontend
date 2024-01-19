@@ -14,7 +14,7 @@ export default function QuizComplete({navigation, route}) {
     {categoryName: 'Science', iconName: 'bacteria'},
     {categoryName: 'Food', iconName: 'drumstick-bite'},
     {categoryName: 'Technology', iconName: 'robot'},
-    {categoryName: 'Pop-culture', iconName: 'tv'},
+    {categoryName: 'Pop', iconName: 'tv'},
   ];
 
   const [categories, setResult] = useState([]);
@@ -28,6 +28,8 @@ export default function QuizComplete({navigation, route}) {
   } else {
     categoryId = Id;
   }
+
+  console.log('why is username undefined' + userName);
 
   const calculateIconName = categoryName => {
     let name = categoryIcons
