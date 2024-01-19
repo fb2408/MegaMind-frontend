@@ -24,22 +24,22 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false, animation: 'none'}}
+          options={{headerShown: false, animation: 'slide_from_righte'}}
         />
         <Stack.Screen
           name="Leagues"
           component={Leagues}
-          options={{headerShown: false, animation: 'none'}}
+          options={{headerShown: false, animation: 'slide_from_right'}}
         />
         <Stack.Screen
           name="League"
           component={League}
-          options={{headerShown: false, animation: 'none'}}
+          options={{headerShown: false, animation: 'slide_from_right'}}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
-          options={{headerShown: false, animation: 'none'}}
+          options={{headerShown: false, animation: 'slide_from_right'}}
         />
         <Stack.Screen
           name="SelectCategories"
