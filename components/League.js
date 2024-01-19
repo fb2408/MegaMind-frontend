@@ -2,12 +2,11 @@ import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Footer from './Footer';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconF from 'react-native-vector-icons/FontAwesome5';
-import {getLeaugesForUser, getOneLeagueForUser} from "../stores/leagueStore";
+import { getOneLeagueForUser} from "../stores/leagueStore";
 import {useEffect, useState} from "react";
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useIsFocused } from '@react-navigation/native'
 
-const quizDone = false;
 
 export default function League({route, navigation}) {
 
@@ -136,7 +135,7 @@ export default function League({route, navigation}) {
                     <Image source={require('../public/icons/head_3.png')}
                            className='w-10 h-10 rounded-full mr-2' />
                     <Text
-                        className='font-semibold text-blue-950 text-base'>{currentUser.lastname && (currentUser.firstname + ' ' + currentUser.lastname.substr(0, 1) + '.')}</Text>
+                        className='font-semibold text-blue-950 text-base'>{currentUser ? currentUser.firstname ? currentUser.lastname ? (currentUser.firstname + ' ' + currentUser.lastname.substr(0, 1) + '.') : "" : "" : ""}</Text>
                   </View>
                   <View className='flex flex-row items-center'>
                     {(currentUser && currentUser.up === -1) ? (

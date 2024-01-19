@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function QuizComplete({navigation, route, props}) {
+export default function QuizComplete({navigation, route}) {
   const categoryIcons = [
     {categoryName: 'History', iconName: 'book-open'},
     {categoryName: 'Music', iconName: 'music'},
@@ -197,12 +197,12 @@ export default function QuizComplete({navigation, route, props}) {
               navigation.navigate('League', {
                 leagueId: leagueId,
                 userId: userId,
-                userName: userName,
+                username: userName,
               });
             } else {
               navigation.navigate('Home', {
                 userId: userId,
-                userName: userName,
+                username: userName,
               });
             }
           }}>
