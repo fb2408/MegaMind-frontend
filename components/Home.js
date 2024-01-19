@@ -115,6 +115,7 @@ export default function Home({navigation, route}) {
               homeData.favouriteCategories.map(cat => (
                 <TouchableOpacity
                   disabled={cat.dailyDone}
+                  style={{opacity: cat.dailyDone ? 0.4 : 1}}
                   onPress={() =>
                       navigation.navigate('QuizGame', {
                         userId: userId,
