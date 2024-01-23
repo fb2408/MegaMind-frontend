@@ -279,7 +279,7 @@ export default function QuizGame({navigation, route, props}) {
               elevation: 18,
             }}
             className=" mt-7 rounded-xl items-center width-screen  ml-5 mr-5  animate-pulse">
-            <Text className=" text-l text-white text-center p-5" style={{fontFamily: "ShantellSans-Bold"}}>
+            <Text className=" text-lg text-white text-center p-5" style={{fontFamily: "ShantellSans-Regular"}}>
               {currentQuestion.questionText}
             </Text>
           </View>
